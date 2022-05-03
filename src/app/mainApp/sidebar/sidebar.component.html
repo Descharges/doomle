@@ -1,0 +1,27 @@
+<mat-sidenav-container>
+	<mat-sidenav mode="push" [(opened)]="toolbarOpened">
+		<mat-nav-list>
+
+			<mat-list-item (click)="toggleSubmenu()">
+				HM40
+				<mat-icon class="menu-button">expand_more</mat-icon>
+			</mat-list-item>
+			
+			<div class="submenu" *ngIf="showSubmenu" >
+				<a mat-list-item href="">Keystroke</a>
+				<a mat-list-item href="">Gestalt</a>
+			</div>
+
+			<mat-list-item>
+				WE4A
+			</mat-list-item>
+
+		</mat-nav-list>
+	</mat-sidenav>
+
+
+	<mat-sidenav-content>
+		<button (click)="toolbarOpened = !toolbarOpened">Toogle sidenav</button>
+	</mat-sidenav-content>
+
+  </mat-sidenav-container>
