@@ -12,12 +12,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './mainApp/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ExplorerComponent } from './mainApp/explorer/explorer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent
+    SidebarComponent,
+    ExplorerComponent
   ],
   imports: [
     BrowserModule,
