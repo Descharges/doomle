@@ -1,25 +1,25 @@
 <mat-sidenav-container>
-	<mat-sidenav mode="side" [(opened)]="toolbarOpened">
+
+
+	<mat-sidenav mode="side" [(opened)]="sidenavOpened">
 		<mat-nav-list>
 
-			<mat-list-item *ngFor="let class of classList">
+			<mat-list-item *ngFor="let class of classList" (click)="selectClass(class)" (click)="openExplorer()">
 				{{class.name}}
 			</mat-list-item>
 			
-
-
 		</mat-nav-list>
-
-		
-		
 	</mat-sidenav>
 
 
+
 	<mat-sidenav-content>
-		<app-explorer></app-explorer>
-		<button (click)="toolbarOpened = !toolbarOpened">Toogle sidenav</button>
-		
+
+		<app-explorer [selectedClass]="selectedClass"  [(explorerOpened)]="this.explorerOpened"></app-explorer>
+		<button (click)="sidenavOpened = !sidenavOpened">Toogle sidenav</button>
 		
 	</mat-sidenav-content>
+
+
 
   </mat-sidenav-container>

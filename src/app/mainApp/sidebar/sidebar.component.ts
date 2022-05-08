@@ -1,23 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Class } from 'src/objectClass/Class';
 
 
 
-
-
-export class Class {
-  
-    id:number = -1;
-    name:string = "";
-    definition:string = "";
-    color:string = "";
-    main_resource_id:number = -1;
-
-  constructor(name?:string){
-    if(name !== undefined)
-      this.name = name;
-  }
-
-}
 
 @Component({
   selector: 'app-sidebar',
@@ -27,7 +12,10 @@ export class Class {
 export class SidebarComponent implements OnInit {
 
 
-  toolbarOpened:boolean = false;
+  sidenavOpened:boolean = false;
+  explorerOpened:boolean = false;
+
+  selectedClass:Class = new Class();
 
 
   //@test shoud be initialised with api instead
@@ -44,6 +32,19 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
    
+  }
+
+  
+  //Change the value of the selected class so that the explorer can use it  
+  selectClass(selectedClass:Class):void{
+    this.selectedClass.id = selectedClass.id;
+    this.selectedClass.name = selectedClass.name;
+  }
+
+
+  openExplorer():void{
+    if(this.explorerOpened == false)
+      this.explorerOpened = true;
   }
 
 

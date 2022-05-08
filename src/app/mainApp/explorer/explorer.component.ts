@@ -1,22 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+import { Class } from 'src/objectClass/Class';
+import { Ressource } from 'src/objectClass/Ressource';
 
 
-export class Ressource {
-  
-  name:string = "";
-  id:number = -1;
-  class_id:number = -1;
-  path:string = "";
-  file_id:number = -1;
-  markdown_id:number = -1;
-  test_id:number = -1;
 
-  constructor(name?:string){
-    if(name !== undefined)
-      this.name = name;
-  }
 
-}
 
 
 @Component({
@@ -33,8 +22,14 @@ export class ExplorerComponent implements OnInit {
   ]
     ;
 
-  toolbarOpened:boolean = false;
+  @Input() selectedClass:Class = new Class();
+  @Input() explorerOpened:boolean = false;
+  @Output() explorerOpenedChange = new EventEmitter<boolean>();
+
+  //@todo array of boolean depending on the number of submenues there is
   showSubmenu:boolean = false;
+
+
 
   constructor() { }
 
@@ -45,9 +40,14 @@ export class ExplorerComponent implements OnInit {
   toggleSubmenu():void{
     console.log("coucou");
     console.log(this.showSubmenu);
-    this.showSubmenu = !this.showSubmenu;
+    this.showSubmenu = !this.showSubmenu; 
     
-
 }
 
+  toggleExplorer():boolean{
+    this.explorerOpened = !this.explorerOpened;
+    this.explorerOpenedChange.emit(this.explorerOpened);
+    console.log(this.explorerOpened);
+    return this.explorerOpened;
+  }
 }

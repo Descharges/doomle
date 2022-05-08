@@ -1,9 +1,9 @@
 <mat-sidenav-container>
-    <mat-sidenav mode="push" [(opened)]="toolbarOpened">
+    <mat-sidenav mode="side" [(opened)]="explorerOpened">
         <mat-nav-list>
 
             <mat-list-item (click)="toggleSubmenu()">
-                HM40
+                {{selectedClass.name}}
                 <mat-icon class="menu-button">expand_more</mat-icon>
             </mat-list-item>
             
@@ -19,7 +19,7 @@
 
 
     <mat-sidenav-content>
-        <button (click)="toolbarOpened = !toolbarOpened">Toogle sidenav</button>
+        <button (click)="toggleExplorer()">Toogle sidenav</button>
     </mat-sidenav-content>
 
   </mat-sidenav-container>
