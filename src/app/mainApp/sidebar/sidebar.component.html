@@ -1,7 +1,7 @@
 <mat-sidenav-container>
 
 
-	<mat-sidenav mode="side" [(opened)]="sidenavOpened">
+	<mat-sidenav #sidebar mode="side" [(opened)]="sidenavOpened">
 		<mat-nav-list>
 
 			<mat-list-item *ngFor="let class of classList" (click)="selectClass(class)" (click)="openExplorer()">
@@ -16,7 +16,7 @@
 	<mat-sidenav-content>
 
 		<app-explorer [selectedClass]="selectedClass"  [(explorerOpened)]="this.explorerOpened"></app-explorer>
-		<button (click)="sidenavOpened = !sidenavOpened">Toogle sidenav</button>
+		<button (click)="sidebar.toggle()">Toogle sidenav</button>
 		
 	</mat-sidenav-content>
 

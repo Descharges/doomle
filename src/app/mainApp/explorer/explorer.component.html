@@ -1,5 +1,5 @@
 <mat-sidenav-container>
-    <mat-sidenav mode="side" [(opened)]="explorerOpened">
+    <mat-sidenav #explorer mode="side" [(opened)]="explorerOpened">
         <mat-nav-list>
 
             <mat-list-item (click)="toggleSubmenu()">
@@ -19,7 +19,7 @@
 
 
     <mat-sidenav-content>
-        <button (click)="toggleExplorer()">Toogle sidenav</button>
+        <button (click)="explorer.toggle()">Toogle sidenav</button>
     </mat-sidenav-content>
 
   </mat-sidenav-container>
