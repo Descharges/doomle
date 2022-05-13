@@ -22,19 +22,3 @@ mat-sidenav {
 .submenu{
     margin-left: 10px;
 }
-
-mat-sidenav-container{
-    --visible-drawer-space: 70px;
-
-}
-
-.mat-drawer {
-    &.mat-drawer-side {
-      transform: translate3d(calc(-100% + var(--visible-drawer-space)), 0, 0);
-      visibility: visible !important; // always visible
-    }
-  }
-
-.mat-drawer-content {
-  margin-left: var(--visible-drawer-space);
-}
