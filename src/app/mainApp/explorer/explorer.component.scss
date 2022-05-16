@@ -18,6 +18,12 @@ mat-sidenav {
     border-radius: 10px;
     
     text-align: center;
+
+   
+}
+
+mat-sidenav-content{
+    padding-left:20px; /*Otherwise the explorer overlap the content part*/
 }
 
 
