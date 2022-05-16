@@ -18,6 +18,7 @@ import { FileManagerComponent } from './mainApp/file-manager/file-manager.compon
 import { FileManagerSectionComponent } from './mainApp/file-manager/file-manager-section/file-manager-section.component';
 
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { FileManagerSectionComponent } from './mainApp/file-manager/file-manager
     MatListModule,
     MatButtonModule,
     FormsModule,
-    DragDropModule
+    DragDropModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
