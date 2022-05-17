@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./account/login/login.component";
-import {MainViewComponent} from "./mainApp/main-view/main-view.component"
+import { SidebarComponent } from './mainApp/sidebar/sidebar.component';
+import { ExplorerComponent } from './mainApp/explorer/explorer.component';
 
 const routes: Routes = [
   {path: "login", component: LoginComponent},
-  {path:"", component: MainViewComponent}
+  {path:"", component: SidebarComponent},
+  {path:"", component: ExplorerComponent, outlet: "cringe"}
 ];
 
 

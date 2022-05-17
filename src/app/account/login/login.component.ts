@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CheckloginService } from '../../checklogin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   login: string;
  
 
-  constructor(private log: CheckloginService) {
+  constructor(private log: CheckloginService, private router: Router) {
     this.login = "no"
   }
 
@@ -24,6 +25,8 @@ export class LoginComponent implements OnInit {
     console.log("login value :" + login);
     if(login){
       this.login = "succ"
+      this.router.navigate([""]);
+      
     }else{
       this.login = "fail"
     }

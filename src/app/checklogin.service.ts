@@ -10,11 +10,28 @@ export class CheckloginService {
 
   constructor(private http: HttpClient) { }
 
-  async req(url:any, creds:any){
+  private async loginReq(url:any, creds:any){
     return this.http.post(url + "/login", creds,{
       withCredentials : true,
       responseType : "text"
     }).toPromise();
+  }
+
+  private async verifLoginReq(url:any){
+    return this.http.get(url + "/login",{
+      withCredentials : true,
+      responseType : "text"
+    }).toPromise();
+  }
+
+  async checkLogin(): Promise<boolean> {
+    const data = await this.verifLoginReq("http://localhost:4200/api");
+    console.log(data);
+    if(data == "Ok"){
+      return true;
+    }else{
+      return false;
+    }
   }
 
 
@@ -27,7 +44,7 @@ export class CheckloginService {
       "password" : pwd
     }
 
-    const data = await this.req(url, creds);
+    const data = await this.loginReq(url, creds);
     console.log(data);
 
     if(data=="Login succesfull"){

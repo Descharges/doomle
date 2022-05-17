@@ -1,0 +1,33 @@
+mat-sidenav-container {
+    height: 85vh;
+
+}
+
+mat-sidenav {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 20vh;
+    margin: 16px;
+    width: 200px;
+    padding: 16px;
+
+    border-right: none;
+    background: #002b5c;
+    color: white;
+    border-radius: 10px;
+    
+    text-align: center;
+}
+
+
+.submenu{
+    margin-left: 10px;
+
+}
+
+
+
+mat-list-item{
+    flex: 1;    
+}
