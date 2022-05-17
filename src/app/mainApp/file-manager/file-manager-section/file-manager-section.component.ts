@@ -15,7 +15,7 @@ export class FileManagerSectionComponent implements OnInit {
 
   faTimes = faTimes;
 
-  @Output() onDeleteRessource:EventEmitter<Task> = new EventEmitter();
+  @Output() onDeleteSection:EventEmitter<Task> = new EventEmitter();
   ressourceList:Ressource[] = [
     new Ressource("Pdf cool"),
     new Ressource("Vidéo sympa"),
@@ -32,8 +32,15 @@ export class FileManagerSectionComponent implements OnInit {
     moveItemInArray(this.ressourceList, event.previousIndex, event.currentIndex);
   }
 
-  onDelete():void{
-    this.onDeleteRessource.emit();
+  onDeleteRessource(ressource:Ressource):void{
+    
+      // TODO implement function with the following code example 
+      /*Code example :
+      this.taskService.deleteTask(task).subscribe(
+        () => (this.tasks = this.tasks.filter((t) => t.id !== task.id))//filter it out from the UI*/
+      
+    
   }
 
+  
 }
