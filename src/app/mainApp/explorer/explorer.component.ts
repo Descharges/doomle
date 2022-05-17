@@ -6,8 +6,6 @@ import { Ressource } from 'src/objectClass/Ressource';
 
 
 
-
-
 @Component({
   selector: 'app-explorer',
   templateUrl: './explorer.component.html',
@@ -23,6 +21,7 @@ export class ExplorerComponent implements OnInit {
     ;
 
   @Input() selectedClass:Class = new Class();
+
   @Input() explorerOpened:boolean = false;
   @Output() explorerOpenedChange = new EventEmitter<boolean>();
 
@@ -43,6 +42,7 @@ export class ExplorerComponent implements OnInit {
     this.showSubmenu = !this.showSubmenu; 
     
 }
+
 
   toggleExplorer():boolean{
     this.explorerOpened = !this.explorerOpened;
