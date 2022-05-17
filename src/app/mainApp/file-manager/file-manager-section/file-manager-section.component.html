@@ -1,9 +1,10 @@
 <h1>Section test</h1>
 <div cdkDropList class="ressources-list" (cdkDropListDropped)="drop($event)">
     <div class="ressource" *ngFor="let ressource of ressourceList" cdkDrag>{{ressource.name}}
-        <fa-icon [icon]="faTimes" (click)="onDelete()" ></fa-icon>
+        <fa-icon [icon]="faTimes" (click)="onDeleteRessource(ressource)" ></fa-icon>
     </div>
     <button>Ajouter une ressource</button>
     
 </div>
-<button>Ajouter une section</button>
+
+<button>Ajouter un dossier</button>

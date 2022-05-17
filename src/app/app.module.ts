@@ -8,6 +8,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +21,10 @@ import { FileManagerSectionComponent } from './mainApp/file-manager/file-manager
 
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MainViewComponent } from './mainApp/main-view/main-view.component';
+import { CalendarComponent } from './mainApp/calendar/calendar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +32,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SidebarComponent,
     ExplorerComponent,
     FileManagerComponent,
-    FileManagerSectionComponent
+    FileManagerSectionComponent,
+    MainViewComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +46,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatButtonModule,
     FormsModule,
     DragDropModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

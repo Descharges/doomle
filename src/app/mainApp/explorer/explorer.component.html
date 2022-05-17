@@ -1,7 +1,7 @@
 <mat-sidenav-container>
     <mat-sidenav #explorer mode="side" [(opened)]="explorerOpened">
         <mat-nav-list>
-
+            <button (click)="toggleExplorer()">Close</button>
             <mat-list-item (click)="toggleSubmenu()">
                 {{selectedClass.name}}
                 <mat-icon class="menu-button">expand_more</mat-icon>
@@ -19,9 +19,8 @@
 
 
     <mat-sidenav-content>
-
-        <button (click)="toggleExplorer()">Toggle sidenav</button>
         <app-file-manager></app-file-manager>
+        
     </mat-sidenav-content>
 
   </mat-sidenav-container>
