@@ -16,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './mainApp/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExplorerComponent } from './mainApp/explorer/explorer.component';
+import { AuthappComponent } from './account/authapp.component';
+import { MainappComponent } from './mainApp/mainapp.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { ExplorerComponent } from './mainApp/explorer/explorer.component';
     MainViewComponent,
     SidebarComponent,
     ExplorerComponent,
-    MainViewComponent
+    MainViewComponent,
+    AuthappComponent,
+    MainappComponent
   ],
   imports: [
     BrowserModule,

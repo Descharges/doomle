@@ -28,17 +28,11 @@ export class SidebarComponent implements OnInit {
   ]
     ;
 
-  constructor(private log: CheckloginService, private router: Router) { 
+  constructor() { 
     
   }
 
-  async ngOnInit(): Promise<void> {
-
-    if ( await this.log.checkLogin() === false){
-      this.router.navigate(["/login"]);
-    };
-   
-  }
+  ngOnInit(){}
 
   
   //Change the value of the selected class so that the explorer can use it  
