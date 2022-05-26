@@ -17,8 +17,14 @@ export class LoginComponent implements OnInit {
     this.login = "no"
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    if (await this.log.checkAlive() == false){
+      this.router.navigate(["/cringe"]);
+    };
+    
   }
+
+  
 
   async checkLogin(): Promise<void> {
     const login = await this.log.checkLoginCreds(this.mail.nativeElement.value,this.pwd.nativeElement.value);

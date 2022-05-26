@@ -24,6 +24,24 @@ export class CheckloginService {
     }).toPromise();
   }
 
+  async checkAlive(){
+
+    const data = await this.http.get(
+      'http://localhost:4200/api/',
+       {observe: 'response'}
+    ).toPromise().catch(err =>{
+     return err.status;
+    })
+
+    if(data == 504){
+      return false;
+    }else{
+      return true;
+    }
+
+   
+  }
+
   async checkLogin(): Promise<boolean> {
     const data = await this.verifLoginReq("http://localhost:4200/api");
     console.log(data);

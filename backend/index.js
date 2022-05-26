@@ -5,6 +5,13 @@ const sessions = require('express-session');
 const bcrypt = require("bcrypt");
 const cors = require('cors')
 
+const pool = mariadb.createPool({
+    host: 'localhost', 
+    user:'api', 
+    password: 'api',
+    database: 'Doomle'
+});
+
 
 
 const app = express();
@@ -34,10 +41,12 @@ app.use(sessions({
 app.post("/login", async (req, res)=>{
     try{
         console.log(req.body.username);
-        console.log(myusername);
-        if(req.body.username == myusername && req.body.password == mypassword){
-            req.session.userid = myusername;
-            console.log(req.session);
+        const query = `SELECT mail, type, password FROM user WHERE mail = "${req.body.username}";`
+        console.log(query);
+        const result = await pool.query(query)
+        console.log(result);
+        if(result[0]){
+            req.session.userid = 1;
             res.status(200).send("Login succesfull");  
         }else{
             res.status(200).send("Bad password")

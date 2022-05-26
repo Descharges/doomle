@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExplorerComponent } from './mainApp/explorer/explorer.component';
 import { MainappComponent } from './mainApp/mainapp.component';
 import { RegisterComponent } from './account/register/register.component';
+import { CringeComponent } from './cringe/cringe.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { RegisterComponent } from './account/register/register.component';
     MainViewComponent,
     MainappComponent,
     RegisterComponent,
+    CringeComponent,
   ],
   imports: [
     BrowserModule,

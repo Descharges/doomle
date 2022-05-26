@@ -4,6 +4,7 @@ import { SidebarComponent } from './mainApp/sidebar/sidebar.component';
 import { MainappComponent } from './mainApp/mainapp.component';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
+import { CringeComponent } from './cringe/cringe.component';
 
 const routes: Routes = [
   {path:"auth", children:[
@@ -12,6 +13,7 @@ const routes: Routes = [
   ]},
   {path:"login", redirectTo:"auth/login"},
   {path:"register", redirectTo:"auth/register"},
+  {path:"cringe", component:CringeComponent},
   {path:"", component: MainappComponent},
   {path:'**', redirectTo:""},
 

@@ -13,6 +13,10 @@ export class MainappComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
 
+    if (await this.log.checkAlive() == false){
+      this.router.navigate(["/cringe"]);
+    };
+
     if ( await this.log.checkLogin() === false){
       this.router.navigate(["/login"]);
     };
