@@ -1,23 +1,29 @@
 mat-sidenav-container {
-    height: 90vh;
+    height: 100vh;
 
 }
 
 mat-sidenav {
-    height: 100%;
-    margin: 16px;
     width: 200px;
     border-right: none;
-    background: #002b5c;
+    background: #232323;
     color: white;
-    border-radius: 10px;
-    padding: 16px;
     text-align: center;
     visibility: visible !important;
 }
 
 
-
+button {
+    height: 50px;
+    background-color:  #232323;
+    outline: none;
+    font-size:xx-large;
+    color: white;
+    border-end-end-radius: 10px;
+    border-start-end-radius: 10px;
+    border: none;
+    text-decoration:none;
+}
 
 .submenu{
     margin-left: 10px;

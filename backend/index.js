@@ -65,5 +65,9 @@ app.get("/ping", async (req, res)=>{
     res.status(200).send("pong");   
 });
 
+app.get("/tea", async (req, res)=>{
+    res.status(418).send('<img src="https://www.ubuy.sn/productimg/?image=aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNTFRaGVrUHY4YkwuX0FDX1NMMTAwMV8uanBn.jpg" alt="teapot"/>')
+});
+
 console.log("listening on port 8080");
 app.listen(8080);

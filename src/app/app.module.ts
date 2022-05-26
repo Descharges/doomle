@@ -16,8 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './mainApp/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExplorerComponent } from './mainApp/explorer/explorer.component';
-import { AuthappComponent } from './account/authapp.component';
 import { MainappComponent } from './mainApp/mainapp.component';
+import { RegisterComponent } from './account/register/register.component';
 
 
 @NgModule({
@@ -28,8 +28,8 @@ import { MainappComponent } from './mainApp/mainapp.component';
     SidebarComponent,
     ExplorerComponent,
     MainViewComponent,
-    AuthappComponent,
-    MainappComponent
+    MainappComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

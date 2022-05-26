@@ -19,7 +19,11 @@
 
 
     <mat-sidenav-content>
-        <button (click)="explorer.toggle()">Toogle sidenav</button>
+        <button (click)="explorer.toggle()" style="padding-left:  50px; position: absolute; z-index: 100;"><mat-icon [inline]="true">folder</mat-icon></button>
+        <mat-toolbar>
+            <span><b>RE4E > </b>TD > TD1 > Sujet.pdf</span>
+        </mat-toolbar>
+        <iframe src="http://www.sujetsetcorriges.fr/dl/X/Maths/MP/sec-x-2011-maths1-MP.pdf" frameborder="0" style="width: 100%; height: calc(100% - 50px);"></iframe>
     </mat-sidenav-content>
 
   </mat-sidenav-container>
