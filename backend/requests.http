@@ -1,0 +1,8 @@
+Get http://localhost:8080/login HTTP/1.1
+content-Type: application/json
+
+{
+    "username" : "user",
+    "password" : "mypassword"
+} 
+        

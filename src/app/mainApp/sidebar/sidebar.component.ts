@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Class } from 'src/objectClass/Class';
+import { CheckloginService } from '../../checklogin.service';
+import { Router } from '@angular/router';
 
 
 
@@ -30,9 +32,7 @@ export class SidebarComponent implements OnInit {
     
   }
 
-  ngOnInit(): void {
-   
-  }
+  ngOnInit(){}
 
   
   //Change the value of the selected class so that the explorer can use it  

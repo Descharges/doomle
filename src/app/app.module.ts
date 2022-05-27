@@ -13,6 +13,9 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './account/login/login.component';
+import { MainViewComponent } from './mainApp/main-view/main-view.component';
+import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './mainApp/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExplorerComponent } from './mainApp/explorer/explorer.component';
@@ -21,22 +24,30 @@ import { FileManagerSectionComponent } from './mainApp/file-manager/file-manager
 
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MainViewComponent } from './mainApp/main-view/main-view.component';
 import { CalendarComponent } from './mainApp/calendar/calendar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MainappComponent } from './mainApp/mainapp.component';
+import { RegisterComponent } from './account/register/register.component';
+import { CringeComponent } from './cringe/cringe.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    MainViewComponent,
     SidebarComponent,
     ExplorerComponent,
     FileManagerComponent,
     FileManagerSectionComponent,
-    MainViewComponent
+    MainViewComponent,
+    MainappComponent,
+    RegisterComponent,
+    CringeComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,

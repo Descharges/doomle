@@ -1,0 +1,42 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "karma.conf.js": true,
+        "package.json": true,
+        "package-lock.json": true,
+        "tsconfig.app.json": true,
+        "tsconfig.spec.json": true,
+        "README.md": true,
+        "LICENSE": true,
+        ".gitignore": true,
+        ".editorconfig": true,
+        ".angular/cache/13.3.4": true,
+        ".vscode": true,
+        "node_modules": true,
+        ".angular": true,
+        ".browserslistrc": true,
+        "src/environments": true
+    },
+    "hide-files.files": [
+        "karma.conf.js",
+        "package.json",
+        "package-lock.json",
+        "tsconfig.app.json",
+        "tsconfig.spec.json",
+        "README.md",
+        "LICENSE",
+        ".gitignore",
+        ".editorconfig",
+        ".angular/cache/13.3.4",
+        ".vscode",
+        "node_modules",
+        ".angular",
+        ".browserslistrc",
+        "src/environments"
+    ]
+}

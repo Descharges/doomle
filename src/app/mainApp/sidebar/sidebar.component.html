@@ -1,22 +1,21 @@
-<mat-sidenav-container>
+<mat-sidenav-container autosize>
 
 
-	<mat-sidenav #sidebar mode="side" [(opened)]="sidenavOpened">
+	<mat-sidenav #sidebar mode="push" [(opened)]="sidenavOpened">
+		<img src="/assets/logo.png" style="width: 80%; margin-top: 20px;"/>
+
 		<mat-nav-list>
-
 			<mat-list-item *ngFor="let class of classList" (click)="selectClass(class)" (click)="openExplorer()">
 				{{class.name}}
 			</mat-list-item>
-			
 		</mat-nav-list>
 	</mat-sidenav>
 
 
 
-	<mat-sidenav-content>
-
-		<app-explorer [selectedClass]="selectedClass"  [(explorerOpened)]="this.explorerOpened"></app-explorer>
-		<button (click)="sidebar.toggle()">Toogle sidenav</button>
+	<mat-sidenav-content class="padded">
+		<button (click)="sidebar.toggle()" style="position: absolute; z-index: 100;"><mat-icon [inline]="true">book</mat-icon></button>
+		<app-explorer></app-explorer>
 		
 	</mat-sidenav-content>
 
