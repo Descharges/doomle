@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CheckloginService } from '../../checklogin.service';
+import { CheckloginService } from '../../services/checklogin.service';
 import { Router } from '@angular/router';
 
 @Component({

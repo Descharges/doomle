@@ -9,7 +9,7 @@ const pool = mariadb.createPool({
     host: 'localhost', 
     user:'api', 
     password: 'api',
-    database: 'Doomle'
+    database: 'doomle'
 });
 
 

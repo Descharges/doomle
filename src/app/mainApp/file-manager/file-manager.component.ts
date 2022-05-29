@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Ressource } from 'src/objectClass/Ressource';
+import { RessourceService } from 'src/app/services/ressource.service';
 
 @Component({
   selector: 'app-file-manager',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FileManagerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ressourceService: RessourceService) { }
 
   ngOnInit(): void {
+    //this.ressourceService.getRessources().subscribe((ressource)=>(this.ressources = ressources));
   }
+
+  /*addTask(ressource:Ressource){
+    this.ressourceService.addRessource(ressource).subscribe(
+      (ressource) => (this.ressources.push(ressource)))//filter it out from the UI
+  }*/
 
 }

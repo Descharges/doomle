@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CheckloginService } from '../checklogin.service';
+import { CheckloginService } from '../services/checklogin.service';
 
 @Component({
   selector: 'app-mainapp',

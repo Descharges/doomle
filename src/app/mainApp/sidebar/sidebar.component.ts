@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Class } from 'src/objectClass/Class';
-import { CheckloginService } from '../../checklogin.service';
+import { CheckloginService } from '../../services/checklogin.service';
 import { Router } from '@angular/router';
 
 
