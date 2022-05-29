@@ -29,6 +29,7 @@
                   </div>
 
                   <p *ngIf="this.login=='fail'" style="color:#ff3939;">Mot de passe incorrect</p>
+                  <p *ngIf="this.login=='err'" style="color:#ff3939;">Une erreur est survenue, Doomle est indisponible</p>
 
                   <p class="mb-0 b-lg-2">Pas de compte ? <a href="/auth/register"
                       style="color: #ff7b00;">Inscrivez-vous ici !</a></p>
