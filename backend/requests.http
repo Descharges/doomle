@@ -1,8 +1,10 @@
-Get http://localhost:8080/login HTTP/1.1
+POST http://localhost:8080/newuser HTTP/1.1
 content-Type: application/json
 
 {
-    "username" : "user",
-    "password" : "mypassword"
+    "name" : "Jean",
+    "fam_name" : "Bonneau",
+    "mail" : "jb@jb.jb",
+    "password" : "MDPCRYPT"
 } 
         

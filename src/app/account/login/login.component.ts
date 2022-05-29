@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit {
   async checkLogin(): Promise<void> {
     const login = await this.log.checkLoginCreds(this.mail.nativeElement.value,this.pwd.nativeElement.value);
     console.log("login value :" + login);
-    if(login){
+    if(login == null){
+      this.login = "err";
+    } else if(login){
       this.login = "succ"
       this.router.navigate([""]);
       
