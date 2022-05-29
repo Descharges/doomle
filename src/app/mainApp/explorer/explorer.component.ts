@@ -44,6 +44,9 @@ export class ExplorerComponent implements OnInit {
     
 }
 
+
+// Tell the parent component the state of explorerOpened 
+// Return the state of explorerOpened
   toggleExplorer():boolean{
     this.explorerOpened = !this.explorerOpened;
     this.explorerOpenedChange.emit(this.explorerOpened);

@@ -10,7 +10,16 @@ mat-sidenav {
     background:  #ff7b00;
     color: #232323;
     text-align: center;
+<<<<<<< HEAD
+
+   
+}
+
+mat-sidenav-content{
+    padding-left:20px; /*Otherwise the explorer overlap the content part*/
+=======
     visibility: visible !important;
+>>>>>>> 3fd626b20e63d151aaef232c4f57377e20112856
 }
 
 mat-toolbar {

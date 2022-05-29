@@ -1,7 +1,7 @@
 <mat-sidenav-container>
     <mat-sidenav #explorer mode="side" [(opened)]="explorerOpened">
         <mat-nav-list>
-
+            <button (click)="toggleExplorer()">Close</button>
             <mat-list-item (click)="toggleSubmenu()">
                 {{selectedClass.name}}
                 <mat-icon class="menu-button">expand_more</mat-icon>
@@ -19,11 +19,16 @@
 
 
     <mat-sidenav-content>
+<<<<<<< HEAD
+        <app-file-manager></app-file-manager>
+        
+=======
         <button (click)="explorer.toggle()" style="padding-left:  50px; position: absolute; z-index: 100;"><mat-icon [inline]="true">folder</mat-icon></button>
         <mat-toolbar>
             <span><b>RE4E > </b>TD > TD1 > Sujet.pdf</span>
         </mat-toolbar>
         <iframe src="http://www.sujetsetcorriges.fr/dl/X/Maths/MP/sec-x-2011-maths1-MP.pdf" frameborder="0" style="width: 100%; height: calc(100% - 50px);"></iframe>
+>>>>>>> 3fd626b20e63d151aaef232c4f57377e20112856
     </mat-sidenav-content>
 
   </mat-sidenav-container>
