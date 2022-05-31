@@ -24,11 +24,13 @@ export class SidebarComponent implements OnInit {
   classList:Class[] = [
     new Class("WE4A"),
     new Class("WE4B"),
-    new Class("HM40")
+    new Class("HM40"),
+    new Class("AP4A")
+
   ]
     ;
 
-  constructor() { 
+  constructor(private router: Router) { 
     
   }
 
@@ -37,16 +39,25 @@ export class SidebarComponent implements OnInit {
   
   //Change the value of the selected class so that the explorer can use it  
   selectClass(selectedClass:Class):void{
-    this.selectedClass.id = selectedClass.id;
-    this.selectedClass.name = selectedClass.name;
+    /*this.selectedClass.id = selectedClass.id;
+    this.selectedClass.name = selectedClass.name;*/
+    this.router.navigate(['/', 'class', selectedClass.name])
   }
 
 
   openExplorer():void{
-    if(this.explorerOpened == false)
+    if(this.explorerOpened == false){
       this.explorerOpened = true;
+    }
+      
   }
 
+  toggleSidenav():void{
+    
+    this.sidenavOpened != this.sidenavOpened;
+      
+    
+  }
 
 }
 
