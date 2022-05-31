@@ -7,6 +7,8 @@ const cors = require('cors');
 const { ColdObservable } = require("rxjs/internal/testing/ColdObservable");
 const { exec } = require("child_process");
 
+BigInt.prototype.toJSON = () => {return this.toString()}
+
 console.clear(); 
 
 const pool = mariadb.createPool({
@@ -50,6 +52,7 @@ app.use(sessions({
 
 //Authentification section, request to allow authentification
 
+//request to log in
 app.post("/login", async (req, res)=>{
     try{
         data = req.body;
@@ -57,11 +60,13 @@ app.post("/login", async (req, res)=>{
             throw "Bad request" ;
         }
         console.log("[AUTH]Login requested");
-        const query = `SELECT id, pseudo, mail, type, password FROM user WHERE mail = "${req.body.username}";`
+        const query = `SELECT * FROM user WHERE mail = "${req.body.username}";`
         const result = await pool.query(query)
         if(result[0] && await bcrypt.compare(req.body.password, result[0].password)){
-            req.session.userid = 1;
+            req.session.logged = true;
             req.session.user = result[0];
+            req.session.user.id = Number(req.session.user.id)
+            delete req.session.user.password;
             res.status(200).send("Login succesfull");  
             console.log("[AUTH]Login succesfull of user " + result[0].pseudo);
         }else{
@@ -74,6 +79,7 @@ app.post("/login", async (req, res)=>{
     }
 });
 
+//request to create an account
 app.post("/newuser", async (req, res)=>{
     try{
         console.log("[AUTH]New user creation requested");
@@ -106,6 +112,8 @@ VALUES  ("${pseudo}", "${req.body.name}", "${req.body.fam_name}", "${req.body.ma
     }
 });
 
+
+//request to log out
 app.get("/logout", async (req, res) =>{
     console.log("[AUTH]Logout of user " + req.session.user.pseudo);
     req.session.destroy();
@@ -114,13 +122,80 @@ app.get("/logout", async (req, res) =>{
 
 //TODO:Add login information to request
 app.get("/login", async (req, res)=>{
-    if(req.session.userid){
+    if(req.session.logged){
         res.status(200).send("Ok"); 
     }else{
         res.status(200).send("Not logged in");
     }
     
 });
+
+
+app.get("/user", async (req, res)=>{
+    if(req.session.logged){
+        res.status(200).json({
+            success : true,
+            data : req.session.user
+        })
+    }else{
+        res.status(200).json({
+            success : false,
+            message : "Not logged in"
+        });
+    }
+    
+});
+
+app.get("/classes", async (req, res)=>{
+    if(req.session.logged){
+        res.status(200).json({
+            success : true,
+            data : [
+                {
+                    name : "UV01",
+                    id : 1,
+                    description : "UV numéro 1",
+                    color : "#FFFFFF",
+                    main_res_id : 1
+                },
+                {
+                    name : "UV02",
+                    id : 2,
+                    description : "UV numéro 2",
+                    color : "#FFFFFF",
+                    main_res_id : 2
+                },
+                {
+                    name : "UV03",
+                    id : 3,
+                    description : "UV numéro 3",
+                    color : "#FFFFFF",
+                    main_res_id : 3
+                },
+            ]
+        })
+    }else{
+        res.status(200).json({
+            success : false,
+            message : "Not logged in"
+        });
+    }
+    
+});
+
+app.get("/res/:id", async (req, res)=>{
+    if(req.session.logged){
+        res.sendFile("./res/3.html");
+
+    }else{
+        res.status(200).json({
+            success : false,
+            message : "Not logged in"
+        });
+    }
+    
+});
+
 
 
 //Test section, requests to test connection with server
