@@ -15,7 +15,6 @@ export class SidebarComponent implements OnInit {
 
 
   sidenavOpened:boolean = false;
-  explorerOpened:boolean = false;
 
   selectedClass:Class = new Class();
 
@@ -45,19 +44,6 @@ export class SidebarComponent implements OnInit {
   }
 
 
-  openExplorer():void{
-    if(this.explorerOpened == false){
-      this.explorerOpened = true;
-    }
-      
-  }
-
-  toggleSidenav():void{
-    
-    this.sidenavOpened != this.sidenavOpened;
-      
-    
-  }
 
 }
 

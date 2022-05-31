@@ -1,7 +1,6 @@
 <mat-sidenav-container>
     <mat-sidenav #explorer mode="side" [(opened)]="explorerOpened">
         <mat-nav-list>
-            <button (click)="toggleExplorer()">Close</button>
             <p><br/>Cours : {{selectedClass.name}}</p>
             <mat-list-item (click)="toggleSubmenu()">
                 Chapitre1

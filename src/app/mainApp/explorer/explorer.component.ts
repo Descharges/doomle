@@ -24,7 +24,7 @@ export class ExplorerComponent implements OnInit {
 
   @Input() selectedClass:Class = new Class();
   @Input() explorerOpened:boolean = false;
-  @Output() explorerOpenedChange = new EventEmitter<boolean>();
+
 
   //@todo array of boolean depending on the number of submenues there is
   showSubmenu:boolean = true;
@@ -45,12 +45,4 @@ export class ExplorerComponent implements OnInit {
 }
 
 
-// Tell the parent component the state of explorerOpened 
-// Return the state of explorerOpened
-  toggleExplorer():boolean{
-    this.explorerOpened = !this.explorerOpened;
-    this.explorerOpenedChange.emit(this.explorerOpened);
-    console.log(this.explorerOpened);
-    return this.explorerOpened;
-  }
 }
