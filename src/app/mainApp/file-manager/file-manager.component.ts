@@ -11,8 +11,9 @@ export class FileManagerComponent implements OnInit {
 
   constructor(private ressourceService: RessourceService) { }
 
+  ressources:Ressource[];
   ngOnInit(): void {
-    //this.ressourceService.getRessources().subscribe((ressource)=>(this.ressources = ressources));
+    this.ressourceService.getRessources().subscribe((ressources)=>(this.ressources = ressources));
   }
 
   /*addTask(ressource:Ressource){

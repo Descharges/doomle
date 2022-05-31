@@ -44,6 +44,8 @@ app.use(sessions({
     resave: false 
 }));
 
+
+//=== User
 app.post("/login", async (req, res)=>{
     try{
         console.log("[AUTH]Login requested");
@@ -59,6 +61,15 @@ app.post("/login", async (req, res)=>{
         console.error(err)
         res.status(400).send("Bad request");
     }
+});
+
+app.get("/login", async (req, res)=>{
+    if(req.session.userid){
+        res.status(200).send("Ok"); 
+    }else{
+        res.status(200).send("Not logged in");
+    }
+    
 });
 
 app.post("/newuser", async (req, res)=>{
@@ -84,20 +95,37 @@ VALUES  ("${pseudo}", "${req.body.name}", "${req.body.fam_name}", "${req.body.ma
     }
 });
 
+
 app.get("/logout", async (req, res) =>{
     req.session.destroy();
     res.status(200).send("Logged out");
 });
 
-app.get("/login", async (req, res)=>{
-    if(req.session.userid){
-        res.status(200).send("Ok"); 
-    }else{
-        res.status(200).send("Not logged in");
+
+
+// == Ressources
+app.post("/ressource", async (req, res)=>{
+    try{
+        console.log("[AUTH]Login requested");
+        const query = `SELECT path FROM ressource;`
+        const result = await pool.query(query)
+        if(result[0]){
+            req.session.userid = 1;
+            res.status(200).send("Ressource successfully got");  
+        }
+    }catch (err) {
+        console.error(err)
+        res.status(400).send("Bad request");
     }
-    
 });
 
+
+
+
+
+
+
+// == Test purpose
 app.get("/ping", async (req, res)=>{
     res.status(200).send("pong");   
 });

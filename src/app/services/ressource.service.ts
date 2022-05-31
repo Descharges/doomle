@@ -9,23 +9,28 @@ import { Ressource } from 'src/objectClass/Ressource';
 export class RessourceService {
 
   private apiUrl = 'http://localhost:4200/api';
- 
 
-  constructor( private http:HttpClient) { }
 
-  
+  constructor(private http: HttpClient) { }
 
-  getRessources(): Observable<Ressource[]>{
-    return this.http.get<Ressource[]>(this.apiUrl);
+  getRessources(): Observable<Ressource[]> {
+    return this.http.get<Ressource[]>(this.apiUrl+"/ressource");
   }
 
-  deleteRessource(ressource:Ressource):Observable<Ressource>{
+  private async loginReq(url:any, creds:any){
+    return this.http.post(url + "/login", creds,{
+      withCredentials : true,
+      responseType : "text"
+    }).toPromise();
+  }
+
+  deleteRessource(ressource: Ressource): Observable<Ressource> {
     const url = `${this.apiUrl}/${ressource.id}`;
     return this.http.delete<Ressource>(url);
   }
-/*
-  addRessource(ressource:Ressource):Observable<Ressource>{
-    return this.http.post<Ressource>(this.apiUrl, ressource, httpOptions);
-  }*/
+  /*
+    addRessource(ressource:Ressource):Observable<Ressource>{
+      return this.http.post<Ressource>(this.apiUrl, ressource, httpOptions);
+    }*/
 
 }
