@@ -47,7 +47,6 @@ export class SidebarComponent implements OnInit {
       this.explorerOpened = true;
   }
 
-
 }
 
 
