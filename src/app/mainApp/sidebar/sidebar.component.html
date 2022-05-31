@@ -5,7 +5,7 @@
 		<img src="/assets/logo.png" style="width: 80%; margin-top: 20px;"/>
 
 		<mat-nav-list>
-			<mat-list-item *ngFor="let class of classList" (click)="selectClass(class)" (click)="openExplorer()">
+			<mat-list-item *ngFor="let class of classList" (click)="selectClass(class)">
 				{{class.name}}
 			</mat-list-item>
 		</mat-nav-list>
