@@ -50,9 +50,14 @@ app.use(sessions({
 }));
 
 
+//=== User
+
 //Authentification section, request to allow authentification
 
+
 //request to log in
+
+
 app.post("/login", async (req, res)=>{
     try{
         data = req.body;
@@ -80,6 +85,15 @@ app.post("/login", async (req, res)=>{
 });
 
 //request to create an account
+app.get("/login", async (req, res)=>{
+    if(req.session.userid){
+        res.status(200).send("Ok"); 
+    }else{
+        res.status(200).send("Not logged in");
+    }
+    
+});
+
 app.post("/newuser", async (req, res)=>{
     try{
         console.log("[AUTH]New user creation requested");
@@ -120,6 +134,8 @@ app.get("/logout", async (req, res) =>{
     res.status(200).send("Logged out");
 });
 
+
+
 //TODO:Add login information to request
 app.get("/login", async (req, res)=>{
     if(req.session.logged){
@@ -127,7 +143,6 @@ app.get("/login", async (req, res)=>{
     }else{
         res.status(200).send("Not logged in");
     }
-    
 });
 
 
@@ -209,11 +224,6 @@ app.get("/tea", async (req, res)=>{
 });
 
 //Function to generate some route related to database queries
-
-
-
-
-
 
 
 

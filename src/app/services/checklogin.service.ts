@@ -99,10 +99,7 @@ export class CheckloginService {
     } else {
       return false;
     }
-
-
-
-
+    
 
 
 

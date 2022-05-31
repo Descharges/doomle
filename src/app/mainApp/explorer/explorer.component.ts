@@ -16,9 +16,9 @@ import { Ressource } from 'src/objectClass/Ressource';
 export class ExplorerComponent implements OnInit {
 
   ressourceList:Ressource[] = [
-    new Ressource("Ch1"),
-    new Ressource("Ch2"),
-    new Ressource("Vidéo sympa")
+    new Ressource("pdf1"),
+    new Ressource("pdf2"),
+    new Ressource("vidéo1")
   ]
     ;
 
@@ -27,7 +27,7 @@ export class ExplorerComponent implements OnInit {
   @Output() explorerOpenedChange = new EventEmitter<boolean>();
 
   //@todo array of boolean depending on the number of submenues there is
-  showSubmenu:boolean = false;
+  showSubmenu:boolean = true;
 
 
 
