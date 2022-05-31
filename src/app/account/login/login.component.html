@@ -1,4 +1,4 @@
-<section class="vh-100" style="background-image: url('https://www.oecd-nea.org/upload/docs/image/jpeg/2020-11/book_stack.jpg');">
+<section class="vh-100">
   <div class="container py-3" style="max-width: 600px;">
     <div class="row" >
       <div class="col">
@@ -28,10 +28,10 @@
                     <input class="btn btn-lg btn-block" style="background-color: #ff7b00; transition: 0.5s;" type="submit" value="Connexion"/>
                   </div>
 
-                  <p *ngIf="this.login=='fail'" style="color:#ff3939;">Mot de passe incorrect</p>
+                  <p *ngIf="this.login=='fail'" style="color:#ff3939;">Mot de passe ou email incorrect</p>
                   <p *ngIf="this.login=='err'" style="color:#ff3939;">Une erreur est survenue, Doomle est indisponible</p>
 
-                  <p class="mb-0 b-lg-2">Pas de compte ? <a href="/auth/register"
+                  <p class="mb-0 b-lg-2">Pas de compte ? <a routerLink="/auth/register"
                       style="color: #ff7b00;">Inscrivez-vous ici !</a></p>
                 </form>
 
