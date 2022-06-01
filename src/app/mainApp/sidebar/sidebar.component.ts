@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Class } from 'src/objectClass/Class';
 import { CheckloginService } from '../../services/checklogin.service';
 import { Router } from '@angular/router';
@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+
+  @Input() classId : Number;
+  @Input() resId : Number;
 
 
   sidenavOpened:boolean = false;

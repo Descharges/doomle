@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap  } from '@angular/router';
+import { CheckloginService } from '../services/checklogin.service';
 
 @Component({
   selector: 'app-cringe',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CringeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private log: CheckloginService, private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+
+    if (await this.log.checkAlive() == true){
+      this.router.navigate(["/app"]);
+    };
+
   }
 
 }

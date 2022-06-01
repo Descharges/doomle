@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SecurityContext } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-main-view',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainViewComponent implements OnInit {
 
-  constructor() { }
+  @Input() classId: Number;
+  @Input() resId: Number;
+  text: String;
+  url : SafeUrl;
+
+  constructor(private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
+    this.url = "";
+    if (this.resId == undefined) {
+      this.text = "Veuillez sélectionner un cours"
+    } else {
+      this.text = "Affichage du component n°" + this.resId;
+      this.url = this.sanitizer.bypassSecurityTrustResourceUrl("http://localhost:4200/api/res/" + this.resId);
+      console.log(this.url);
+      
+    }
   }
 
 }

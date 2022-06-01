@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MainViewComponent } from '../main-view/main-view.component';
 
 import { Class } from 'src/objectClass/Class';
 import { Ressource } from 'src/objectClass/Ressource';
@@ -22,6 +23,8 @@ export class ExplorerComponent implements OnInit {
   ]
     ;
 
+  @Input() classId : Number;
+  @Input() resId : Number;
   @Input() selectedClass:Class = new Class();
   @Input() explorerOpened:boolean = false;
 

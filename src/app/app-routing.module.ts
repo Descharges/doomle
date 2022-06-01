@@ -15,14 +15,14 @@ const routes: Routes = [
   {path:"login", redirectTo:"auth/login"},
   {path:"register", redirectTo:"auth/register"},
   {path:"cringe", component:CringeComponent},
-  {path:"", component: MainappComponent},
+  {path:"app", component: MainappComponent},
   {path : "class/:className", component: SidebarComponent
   },
 
 
 
   
-  {path:'**', redirectTo:""},
+  {path:'**', redirectTo:"app"},
   
 ];
 

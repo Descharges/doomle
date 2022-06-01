@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap  } from '@angular/router';
 import { CheckloginService } from '../services/checklogin.service';
 
 @Component({
@@ -9,9 +9,17 @@ import { CheckloginService } from '../services/checklogin.service';
 })
 export class MainappComponent implements OnInit {
 
-  constructor(private log: CheckloginService, private router: Router) { }
+  classId : Number;
+  resId : Number;
+
+  constructor(private log: CheckloginService, private router: Router, private route: ActivatedRoute) { }
 
   async ngOnInit(): Promise<void> {
+
+    this.route.queryParams.subscribe(params => {
+      this.classId = params['class'];
+      this.resId = params['res'];
+    });
 
     if (await this.log.checkAlive() == false){
       this.router.navigate(["/cringe"]);
