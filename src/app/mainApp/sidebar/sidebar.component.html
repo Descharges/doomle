@@ -15,7 +15,7 @@
 
 	<mat-sidenav-content class="padded">
 		<button (click)="sidebar.toggle()" style="position: absolute; z-index: 100;"><mat-icon [inline]="true">book</mat-icon></button>
-		<app-explorer [classId]="this.classId" [resId]="this.resId"></app-explorer>
+		<app-explorer [classId]="this.classId" [resId]="this.resId" classColor="{{this.color}}"></app-explorer>
 		
 	</mat-sidenav-content>
 

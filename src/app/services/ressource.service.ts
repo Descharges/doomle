@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { AnonymousSubject } from 'rxjs/internal/Subject';
 import { Ressource } from 'src/objectClass/Ressource';
 
 @Injectable({
@@ -15,6 +16,14 @@ export class RessourceService {
 
   getRessources(): Observable<Ressource[]> {
     return this.http.get<Ressource[]>(this.apiUrl+"/ressource");
+  }
+
+  async getClasses(): Promise<any>{
+    return await this.http.get(this.apiUrl + "/classes",{
+      observe: "body",
+      withCredentials : true,
+      responseType : "json"
+    }).toPromise();
   }
 
   private async loginReq(url:any, creds:any){

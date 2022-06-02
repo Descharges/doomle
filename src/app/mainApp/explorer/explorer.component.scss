@@ -7,7 +7,6 @@ mat-sidenav {
     padding-top: 50px;
     width: 200px;
     border-right: none;
-    background:  #ff7b00;
     color: #232323;
     text-align: center;
     visibility: visible !important;
@@ -21,7 +20,6 @@ mat-toolbar {
 
 button {
     height: 50px;
-    background-color:  #ff7b00;
     outline: none;
     font-size:xx-large;
     color: #232323;
@@ -29,7 +27,16 @@ button {
     border-start-end-radius: 10px;
     border: none;
     text-decoration:none;
+    transition: 0.5s;
 }
+
+
+button:hover {
+    transition: 0.5s;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 0 #232323, 2px -2px 0 #232323, -2px 2px 0 #232323, -2px -2px 0 #232323, 2px 0px 0 #232323, 0px 2px 0 #232323, -2px 0px 0 #232323, 0px -2px 0 #232323; /* red outline */
+}
+
 
 p {
     display: inline;

@@ -1,5 +1,5 @@
 <mat-sidenav-container>
-    <mat-sidenav #explorer mode="side" [(opened)]="explorerOpened">
+    <mat-sidenav #explorer mode="side" [(opened)]="explorerOpened" [ngStyle]="{'background': this.classColor}">
         <mat-nav-list>
             <p><br/>Cours : {{selectedClass.name}}</p>
             <mat-list-item (click)="toggleSubmenu()">
@@ -26,7 +26,7 @@
 
 
     <mat-sidenav-content>
-        <button (click)="explorer.toggle()" style="padding-left:  50px; position: absolute; z-index: 100;"><mat-icon [inline]="true">folder</mat-icon></button>
+        <button (click)="explorer.toggle()" [ngStyle]="{'background': this.classColor}" style="padding-left:  50px; position: absolute; z-index: 100;"><mat-icon [inline]="true">folder</mat-icon></button>
         <mat-toolbar>
             <span><b>RE4E > </b>TD > TD1 > Sujet.pdf</span>
         </mat-toolbar>

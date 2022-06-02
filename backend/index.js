@@ -26,7 +26,7 @@ const pool = mariadb.createPool({
     host: 'localhost',
     user: 'api',
     password: 'api',
-    database: 'doomle'
+    database: 'Doomle'
 });
 
 function verify(arr) {
@@ -174,21 +174,21 @@ app.get("/classes", async (req, res) => {
                     name: "UV01",
                     id: 1,
                     description: "UV numéro 1",
-                    color: "#FFFFFF",
+                    color: "#e29deb",
                     main_res_id: 1
                 },
                 {
                     name: "UV02",
                     id: 2,
                     description: "UV numéro 2",
-                    color: "#FFFFFF",
+                    color: "#b1eb9d",
                     main_res_id: 2
                 },
                 {
                     name: "UV03",
                     id: 3,
                     description: "UV numéro 3",
-                    color: "#FFFFFF",
+                    color: "#9dc8eb",
                     main_res_id: 3
                 },
             ]

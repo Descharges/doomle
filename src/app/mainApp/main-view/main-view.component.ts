@@ -16,7 +16,7 @@ export class MainViewComponent implements OnInit {
   constructor(private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
-    this.url = "";
+    this.url = this.sanitizer.bypassSecurityTrustResourceUrl("");
     if (this.resId == undefined) {
       this.text = "Veuillez sélectionner un cours"
     } else {

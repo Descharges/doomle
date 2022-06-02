@@ -23,6 +23,7 @@ export class ExplorerComponent implements OnInit {
   ]
     ;
 
+  @Input() classColor : String;
   @Input() classId : Number;
   @Input() resId : Number;
   @Input() selectedClass:Class = new Class();
@@ -31,12 +32,19 @@ export class ExplorerComponent implements OnInit {
 
   //@todo array of boolean depending on the number of submenues there is
   showSubmenu:boolean = true;
+  color:String = "#ff7b00"
 
 
 
   constructor() { }
 
   ngOnInit(): void {
+
+    console.log("classcolor:"+this.classColor)
+
+    if(this.classColor != undefined){
+      this.color = this.classColor;
+    }
    
   }
 
