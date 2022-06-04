@@ -26,7 +26,7 @@ const pool = mariadb.createPool({
     host: 'localhost',
     user: 'api',
     password: 'api',
-    database: 'Doomle'
+    database: 'doomle'
 });
 
 function verify(arr) {
@@ -228,10 +228,12 @@ app.get("/class/:id", async (req, res) => {
                     data: [
                         {
                             path: "/Ressource 2",
+                            ext: "pdf",
                             id: 2
                         },
                         {
                             path: "/Ressource 22",
+                            ext: "pdf",
                             id: 2
                         }
                     ]
@@ -281,7 +283,7 @@ app.get("/res/:id", async (req, res) => {
                 break;
 
             case 3:
-                res.sendFile("./res/3.html", { root: __dirname });
+                res.sendFile("./res/cringe.mp3", { root: __dirname });
                 break;
 
             default:

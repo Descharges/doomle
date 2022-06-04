@@ -1,41 +1,74 @@
-mat-sidenav-container {
-    height: 100vh;
+mat-sidenav-container{
+    height: calc(100% - 60px);
+}
 
+mat-sidenav-content{
+    margin: 0px;
+    height: 100%;
 }
 
 mat-sidenav {
-    padding-top: 50px;
+    height: 100vh;
     width: 200px;
     border-right: none;
-    color: #232323;
+    background-color: #232323;
     text-align: center;
     visibility: visible !important;
 }
 
+
 mat-toolbar {
     padding-left: 100px;
+    height: 60px;
+    background-color: #232323;
+}
+
+.container {
+    color: #fff;
+    width: 500px;
+    margin-top: 5px;
+    margin-left: 40px;
+    position: absolute;
+    float: left;
+    text-align: left;
+  }
+  
+  .cta {
+    width: 50px;
     height: 50px;
-    background-color: lightgrey;
-}
-
-button {
-    height: 50px;
-    outline: none;
-    font-size:xx-large;
-    color: #232323;
-    border-end-end-radius: 10px;
-    border-start-end-radius: 10px;
-    border: none;
-    text-decoration:none;
-    transition: 0.5s;
-}
-
-
-button:hover {
-    transition: 0.5s;
-    color: #FFFFFF;
-    text-shadow: 2px 2px 0 #232323, 2px -2px 0 #232323, -2px 2px 0 #232323, -2px -2px 0 #232323, 2px 0px 0 #232323, 0px 2px 0 #232323, -2px 0px 0 #232323, 0px -2px 0 #232323; /* red outline */
-}
+    border-radius: 50px;
+    border: 2px solid red;
+    background-color: red;
+    color: #fff;
+    transition: width 0.5s;
+  }
+  .cta:hover {
+    width: 180px;
+    transition: width 0.5s;
+  }
+  
+  .cta i {
+    opacity: 1;
+    transition: opacity 0.5s
+  }
+  
+  .cta:hover i {
+    opacity: 0;
+    transition: opacity 0.5s
+  }
+  
+  .cta .button-text {
+    opacity: 0;
+    transition: opacity .5s;
+    position: absolute;
+    width: 200px;
+    left: 0;
+   }
+  
+  .cta:hover .button-text {
+    opacity: 1;
+    transition: opacity 0.5s
+  }
 
 
 p {

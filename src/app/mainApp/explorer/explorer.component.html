@@ -1,5 +1,19 @@
+<div class="container">  
+    <button class="cta" (click)="explorer.toggle()" [ngStyle]="{'background': this.classColor, 'border-color':this.classColor, 'color':this.textColor}">
+        <i class="fa-solid fa-folder fa-lg"></i>
+        <span class="button-text"><b>Mes ressources</b></span>
+    </button>
+    <span><b>   RE4E > </b>TD > TD1 > Sujet.pdf</span>
+</div>
+
+
+
+<mat-toolbar>
+    
+</mat-toolbar>
+
 <mat-sidenav-container>
-    <mat-sidenav #explorer mode="side" [(opened)]="explorerOpened" [ngStyle]="{'background': this.classColor}">
+    <mat-sidenav #explorer mode="side" [(opened)]="explorerOpened" [ngStyle]="{'color': this.classColor}">
         <mat-nav-list>
             <p><br/>Cours : {{selectedClass.name}}</p>
             <mat-list-item (click)="toggleSubmenu()">
@@ -26,10 +40,6 @@
 
 
     <mat-sidenav-content>
-        <button (click)="explorer.toggle()" [ngStyle]="{'background': this.classColor}" style="padding-left:  50px; position: absolute; z-index: 100;"><mat-icon [inline]="true">folder</mat-icon></button>
-        <mat-toolbar>
-            <span><b>RE4E > </b>TD > TD1 > Sujet.pdf</span>
-        </mat-toolbar>
         <app-main-view [classId]="this.classId" [resId]="this.resId"></app-main-view>
     </mat-sidenav-content>
 
