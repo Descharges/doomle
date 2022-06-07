@@ -6,16 +6,13 @@ const bcrypt = require("bcrypt");
 const cors = require('cors');
 const { ColdObservable } = require("rxjs/internal/testing/ColdObservable");
 const { exec } = require("child_process");
+const fs = require("fs");
 
 const ezql = require("./ezql.js");
 
-console.clear();
+const DEBUG = true;
 
-ezql.INSERT(null, "user", [
-    {c:"nom",v:"Caillier"},
-    {c:"prénom",v:"Paul"},
-    {c:"age",v:13},
-])
+console.clear();
 
 
 BigInt.prototype.toJSON = () => { return this.toString() }
@@ -26,7 +23,7 @@ const pool = mariadb.createPool({
     host: 'localhost',
     user: 'api',
     password: 'api',
-    database: 'doomle'
+    database: 'Doomle'
 });
 
 function verify(arr) {
@@ -38,6 +35,16 @@ function verify(arr) {
     return true;
 }
 
+function makeid() {
+    var date = new Date();
+    var result = '[' + date.getDay() + "-" + date.getMonth() + "-" + date.getFullYear() + "][" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "]-";
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';;
+    for (var i = 0; i < 5; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+            characters.length));
+    }
+    return result;
+}
 
 const app = express();
 
@@ -79,7 +86,7 @@ app.post("/login", async (req, res) => {
         //const query = `SELECT * FROM user WHERE mail = "${req.body.username}";`
         //const result = await pool.query(query)
 
-        const result = await ezql.SELECT(pool,"user",[],`mail = "${req.body.username}"`)
+        const result = await ezql.SELECT(pool, "user", [], `mail = "${req.body.username}"`)
 
         if (result[0] && await bcrypt.compare(req.body.password, result[0].password)) {
             req.session.logged = true;
@@ -270,26 +277,32 @@ app.get("/class/:id", async (req, res) => {
 });
 
 
-app.get("/res/:id", async (req, res) => {
+app.get("/resmeta/:id", async (req, res) => {
     console.log("[REQ] File requested :" + req.params.id)
-    if (req.session.logged) {
-        switch (Number(req.params.id)) {
-            case 1:
-                res.sendFile("./res/1.pdf", { root: __dirname });
-                break;
+    if (req.session.logged || DEBUG) {
 
-            case 2:
-                res.sendFile("./res/2.jpg", { root: __dirname });
-                break;
+        //perform authorization control
 
-            case 3:
-                res.sendFile("./res/cringe.mp3", { root: __dirname });
-                break;
+        data = await ezql.SELECT(pool, "ressources", ["type", "class"], `id = ${Number(req.params.id)} `)
 
-            default:
-                res.status(404).send("File not found")
-                break;
+        if (data.length == 0) {
+            res.status(200).json({
+                success: false,
+                message: "The file couldn't be found"
+            })
+        } else {
+            res.status(200).json({
+                success: true,
+                data: {
+                    type: data[0].type,
+                    class: data[0].class
+                }
+            })
+
         }
+
+
+
     } else {
         res.status(200).json({
             success: false,
@@ -297,6 +310,79 @@ app.get("/res/:id", async (req, res) => {
         });
     }
 
+});
+
+app.get("/res/:resid", async (req, res) => {
+    console.log("[REQ] File requested :" + req.params.resid)
+    if (req.session.logged || DEBUG) {
+
+        //perform authorization control
+
+        try {
+            data = await ezql.SELECT(pool, "ressources", ["filename"], `id = ${Number(req.params.resid)} `)
+        }catch{
+            res.status(400).json({
+                success: false,
+                message: "The SQL Query failed"
+            })
+        }
+
+        if (data.length == 0) {
+            res.status(404).json({
+                success: false,
+                message: "The file couldn't be found"
+            })
+        } else {
+            res.status(200).sendFile("res/" + data[0].filename, { root: __dirname })
+        }
+
+
+
+    } else {
+        res.status(200).json({
+            success: false,
+            message: "Not logged in"
+        });
+    }
+
+});
+
+app.post("/res", async (req, res) => {
+    try {
+        console.log("[RES]New file upload requested");
+
+        data = req.body;
+
+        if (verify([data.class, data.path, data.type, data.filedata]) == false) {
+            throw "Bad request";
+        }
+
+        filename = makeid() + data.type
+
+        ezql.INSERT(pool, "ressources", [
+            { c: "class", v: data.class },
+            { c: "path", v: data.path },
+            { c: "type", v: data.type },
+            { c: "filename", v: filename },
+        ])
+
+        file = data.filedata;
+
+        fs.writeFile("./res/" + filename, file, 'base64', (err) => {
+            console.log("[RES]upload file result (null means success) :" + err);
+
+        })
+
+        res.status(200).json({
+            success: true
+        })
+
+
+
+    } catch (err) {
+        console.error(err)
+        res.status(400).send("Bad request");
+    }
 });
 
 

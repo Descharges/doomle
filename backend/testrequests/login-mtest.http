@@ -2,7 +2,7 @@ POST http://localhost:8080/login HTTP/1.1
 content-Type: application/json
 
 {
-  "username" : "p@c.fr",
-  "password" : "lol"
+  "username" : "m@t.fr",
+  "password" : "test"
 }
 

@@ -33,6 +33,16 @@ export class RessourceService {
     }).toPromise();
   }
 
+  async getFileMeta(id:Number): Promise<any>{
+    return await this.http.get(this.apiUrl + "/resmeta/" + id,{
+      observe: "body",
+      withCredentials : true,
+      responseType : "json"
+    }).toPromise();
+  }
+
+
+
   deleteRessource(ressource: Ressource): Observable<Ressource> {
     const url = `${this.apiUrl}/${ressource.id}`;
     return this.http.delete<Ressource>(url);

@@ -40,12 +40,12 @@ module.exports = {
 
 
         console.log("[SQL] Running query : " + query)
-        //try{
-        //    return await pool.query(query)
-        //}catch(err){
-        //    console.log("[SQL] Request failed : " + err.text)
-        //    throw "SQL query failed"
-        //}
+        try{
+            return await pool.query(query)
+        }catch(err){
+            console.log("[SQL] Request failed : " + err.text)
+            throw "SQL query failed"
+        }
     }
 
 }

@@ -1,3 +1,14 @@
-<div frameborder="0" style="width: 100%; height:100%; background-color: #232323; color: white;">
-    <iframe [src]='this.url' frameborder="0" style="width: 100%; height: 100%;" ></iframe>
+<div frameborder="0" style="width: 100%; height: 100%; background-color: #000000C0; color: white;">
+    <embed *ngIf='this.type == ".pdf"' [src]='this.url' frameborder="0" style="width: 100%; height: 100%;">
+    <pre *ngIf='this.type == ".txt"' style="padding: 10px; font-weight: bold;">{{this.text}}</pre>
+    <div *ngIf='this.type == ".html"' style="padding: 10px; height: 100%; overflow-y: scroll;" [innerHtml]="this.text">
+    </div>
+    <div *ngIf='this.type == "link"' style="padding: 10px; height: 100%; text-align: center;">
+        <h1>Doomle ne peux pas encore
+            afficher cette ressource :( </h1><br />
+        <a [href]="this.stringUrl">Mais vous pouvez la télécharger ou l'afficher ici !</a>
+    </div>
+    <div *ngIf='this.type == "none"' style="padding: 10px; height: 100%; text-align: center;">
+        <h1>{{this.text}}</h1>
+    </div>
 </div>
