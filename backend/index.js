@@ -23,7 +23,7 @@ const pool = mariadb.createPool({
     host: 'localhost',
     user: 'api',
     password: 'api',
-    database: 'Doomle'
+    database: 'doomle'
 });
 
 function verify(arr) {
@@ -211,21 +211,29 @@ app.get("/classes", async (req, res) => {
 
 app.get("/class/:id", async (req, res) => {
     console.log("[REQ] File requested :" + req.params.id)
-    if (req.session.logged) {
+    if (req.session.logged || DEBUG) {
         switch (Number(req.params.id)) {
             case 1:
                 res.status(200).json({
                     success: true,
-                    data: [
-                        {
-                            path: "/Ressource 1",
-                            id: 1
-                        },
-                        {
-                            path: "/Ressource 11",
-                            id: 1
-                        }
-                    ]
+                    data: {
+                        name: "UV01",
+                        description: "Une UV vraiment très très coolax",
+                        main_res_id: 2,
+                        ressources: [
+                            {
+                                path: "/Ressource 1",
+                                id: 1
+                            },
+                            {
+                                path: "/Ressource 2",
+                                id: 1
+                            }
+                        ]
+                    }
+
+
+
                 })
                 break;
 
@@ -264,7 +272,10 @@ app.get("/class/:id", async (req, res) => {
                 break;
 
             default:
-                res.status(404).send("class not found")
+                res.status(404).json({
+                    success: false,
+                    message:"The class couldn't be found or isn't available to you"
+                })
                 break;
         }
     } else {
@@ -320,7 +331,7 @@ app.get("/res/:resid", async (req, res) => {
 
         try {
             data = await ezql.SELECT(pool, "ressources", ["filename"], `id = ${Number(req.params.resid)} `)
-        }catch{
+        } catch {
             res.status(400).json({
                 success: false,
                 message: "The SQL Query failed"

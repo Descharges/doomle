@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { AnonymousSubject } from 'rxjs/internal/Subject';
 import { Ressource } from 'src/objectClass/Ressource';
@@ -11,7 +12,7 @@ export class RessourceService {
 
   private apiUrl = 'http://localhost:4200/api';
 
-
+  //TODO: Replace toPromise (deprecated) with firstValueFrom
   constructor(private http: HttpClient) { }
 
   getRessources(): Observable<Ressource[]> {
@@ -31,6 +32,14 @@ export class RessourceService {
       withCredentials : true,
       responseType : "text"
     }).toPromise();
+  }
+
+  async getClass(id:Number): Promise<any>{
+    return await firstValueFrom(this.http.get(this.apiUrl + "/class/" + id,{
+      observe: "body",
+      withCredentials : true,
+      responseType : "json"
+    }))
   }
 
   async getFileMeta(id:Number): Promise<any>{
