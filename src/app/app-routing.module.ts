@@ -6,6 +6,7 @@ import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { CringeComponent } from './cringe/cringe.component';
 import { ExplorerComponent } from './mainApp/explorer/explorer.component';
+import { HtmlEditorComponent } from './html-editor/html-editor.component';
 
 const routes: Routes = [
   {path:"auth", children:[
@@ -16,8 +17,8 @@ const routes: Routes = [
   {path:"register", redirectTo:"auth/register"},
   {path:"cringe", component:CringeComponent},
   {path:"app", component: MainappComponent},
-  {path : "class/:className", component: SidebarComponent
-  },
+  {path:"app/editor", component: HtmlEditorComponent},
+  {path : "class/:className", component: SidebarComponent},
 
 
 

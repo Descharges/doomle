@@ -1,0 +1,15 @@
+<ul>
+    <div *ngFor="let el of this.folder, let i = index">
+        <li *ngIf="el.type != 'folder'"
+            [ngStyle]="{'border-color': el.id == this.classId ? this.color : '','color': el.id == this.classId ? this.color : '','border-width': el.id == this.classId ? '3px' : '1px'}">
+            <div style="cursor: pointer;user-select: none;" (click)="this.router.navigateByUrl('/app?class='+this.classId+'&res='+el.id)">📕{{el.name}}</div>
+        </li>
+        <li *ngIf="el.type == 'folder' && !el.opened">
+            <div (click)="el.opened = true" style="cursor: pointer;user-select: none;">📁 {{el.name}}</div>
+        </li>
+        <li *ngIf="el.type == 'folder' && el.opened">
+            <div (click)="el.opened = false" style="cursor: pointer;user-select: none;">📂 {{el.name}}</div>
+            <app-recursive-list [folder]="el.content" [classId]="this.classId" [color]="this.color"></app-recursive-list>
+        </li>
+    </div>
+</ul>

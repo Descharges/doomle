@@ -16,6 +16,10 @@ mat-sidenav {
     visibility: visible !important;
 }
 
+#title {
+  display: inline;
+}
+
 
 mat-toolbar {
     padding-left: 100px;
@@ -25,7 +29,7 @@ mat-toolbar {
 
 .container {
     color: #fff;
-    width: 500px;
+    width: 100%;
     margin-top: 5px;
     margin-left: 40px;
     position: absolute;
@@ -80,3 +84,4 @@ p {
 .submenu{
     margin-left: 10px;
 }
+

@@ -4,7 +4,7 @@
         <i class="fa-solid fa-folder fa-lg"></i>
         <span class="button-text"><b>Mes ressources</b></span>
     </button>
-    <span><b> RE4E > </b>TD > TD1 > Sujet.pdf</span>
+    <span id="title"><b>          {{this.name}}  >  </b>{{this.file}}</span>
 </div>
 
 
@@ -15,33 +15,18 @@
 
 <mat-sidenav-container>
     <mat-sidenav #explorer mode="side" [(opened)]="explorerOpened" [ngStyle]="{'color': this.classColor}"
-        style="width: 20%; text-align: left; background-color: #121212;">
+        style="width: 400px; max-width: 100%; text-align: left; background-color: #121212;">
 
-        <h1 style="margin-left: 20px;">SI40</h1>
+        <h1 style="margin-left: 20px; margin-bottom: -10px;">{{this.name}}</h1>
         <div style="margin: 10px; padding: 10px; border-radius: 20px; border-width: 1px; border:3px solid;">
-            <p style="margin-left:0px; color: white;">Une bonne grosse UV bien cringe qui sert à rien et qui devrait
-                décéder le plus tôt possible</p>
+            <p style="margin-left:0px; color: white;">{{this.description}}</p>
         </div>
+
         <div
             style="margin: 10px; padding: 10px; border-radius: 20px; background-color: #232323; color: lightgray; list-style: none;">
-            <ul style="list-style: none;">
-                <li>📄 - Document texte/HTML</li>
-                <li>🔉 - Document audio</li>
-                <li>📕 - Document PDF</li>
-                <li>🖼️ - Image</li>
-                <li>🎥 - Vidéo</li>
-                <li [ngStyle]="{'color': this.classColor}">📚 - Document inconnu</li>
-                <li>📁 - Dossier fermé</li>
-                <li>📂 - Dossier ouvert
-                    <ul>
-                        <li>📚 - Cours n°1</li>
-                        <li>📚 - Cours n°2</li>
-                        <li>📚 - Cours n°3</li>
-                        <li>📚 - Cours n°4</li>
-                        <li>📚 - Cours n°5</li>
-                    </ul>
-                </li>
-            </ul>
+
+            <app-recursive-list [folder]="this.files" [classId]="this.classId" [color]="this.classColor"></app-recursive-list>
+
         </div>
 
         <!--

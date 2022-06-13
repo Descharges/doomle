@@ -4,9 +4,17 @@
 
 html{
     background-image: url('https://www.oecd-nea.org/upload/docs/image/jpeg/2020-11/book_stack.jpg');
+    width: 100%;
 }
 
 body{
     background-color: transparent !important;
     overflow-y: hidden;
+    width: 100%;
+}
+
+app-root{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
 }

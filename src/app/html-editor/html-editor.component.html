@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="editor">
+        <editor [(ngModel)]="html" (onSaveContent)="test()" [init]="{
+            skin: 'oxide-dark',
+            content_css: 'dark',
+            menubar: false,
+            base_url: '/tinymce',
+            suffix: '.min',
+            plugins: 'lists link image table code help wordcount',
+            toolbar: 'undo redo | code h1 h2 h3 | bold italic | alignleft aligncenter alignright alignjustify | forecolor lists'
+        }"></editor>
+    </div>
+    <div class="preview" [innerHtml]="this.sanitizer.bypassSecurityTrustHtml(this.html)"></div>
+</div>

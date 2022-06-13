@@ -14,7 +14,7 @@ import { RessourceService } from 'src/app/services/ressource.service';
 })
 export class SidebarComponent implements OnInit {
 
-  @Input() classId: Number;
+  @Input() classId: number;
   @Input() resId: Number;
   color: String;
 
@@ -44,10 +44,10 @@ export class SidebarComponent implements OnInit {
 
     if (classes.success == true) {
       classes.data.forEach((el: { id: Number, color: String }) => {
-        console.log(this.classId)
-        console.log(el.id)
+        //console.log(this.classId)
+        //console.log(el.id)
         if (el.id == this.classId) {
-          console.log("true");
+          //console.log("true");
           this.color = el.color
           return;
         }
@@ -55,7 +55,7 @@ export class SidebarComponent implements OnInit {
       }
       );
     }
-    console.log(this.color);
+    //console.log(this.color);
   }
 
 

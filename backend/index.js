@@ -9,11 +9,72 @@ const { exec } = require("child_process");
 const fs = require("fs");
 
 const ezql = require("./ezql.js");
+const { ObjectUnsubscribedError } = require("rxjs");
 
 const DEBUG = true;
 
 console.clear();
 
+function buildFolder(arr, iterations, depth) {
+    var split;
+    var out = [];
+
+    if (iterations == undefined) {
+        iterations = arr.length;
+    }
+
+    if (depth == undefined) {
+        depth = 0;
+    }
+
+
+    var i = 0;
+    var iOut = 0;
+    while (i < iterations) {
+
+        out[iOut] = new Object;
+
+        split = arr[i].path.split("/")
+
+        if (split.length > depth + 1) {
+
+            var toGoThrough = 0;
+            var folderName = split[depth];
+
+            while( i < arr.length && (arr[i].path.split("/")[depth] == folderName)){
+                i++;
+                toGoThrough++;
+            }
+            i--;
+
+
+            out[iOut] = {
+                type: "folder",
+                name: split[depth],
+                opened: false,
+                content: buildFolder(arr.slice(i-toGoThrough+1),toGoThrough,depth+1)
+            }
+
+        } else {
+
+
+            out[iOut] = {
+                type: arr[i].type,
+                id: arr[i].id,
+                name: split[depth]
+            }
+        }
+
+
+
+        i++;
+        iOut++
+    }
+
+    return(out);
+
+
+}
 
 BigInt.prototype.toJSON = () => { return this.toString() }
 
@@ -23,7 +84,7 @@ const pool = mariadb.createPool({
     host: 'localhost',
     user: 'api',
     password: 'api',
-    database: 'doomle'
+    database: 'Doomle'
 });
 
 function verify(arr) {
@@ -78,7 +139,7 @@ app.use(sessions({
 
 app.post("/login", async (req, res) => {
     try {
-        data = req.body;
+        var data = req.body;
         if (verify([data.username, data.password]) == false) {
             throw "Bad request";
         }
@@ -109,7 +170,7 @@ app.post("/newuser", async (req, res) => {
     try {
         console.log("[AUTH]New user creation requested");
 
-        data = req.body;
+        var data = req.body;
 
         if (verify([data.name, data.fam_name, data.mail, data.password]) == false) {
             throw "Bad request";
@@ -210,74 +271,37 @@ app.get("/classes", async (req, res) => {
 });
 
 app.get("/class/:id", async (req, res) => {
-    console.log("[REQ] File requested :" + req.params.id)
+    console.log("[REQ] class requested :" + req.params.id)
     if (req.session.logged || DEBUG) {
-        switch (Number(req.params.id)) {
-            case 1:
+
+        try {
+            var data = await ezql.SELECT(pool, "class", [], `id = ${Number(req.params.id)}`)
+            if (data.length == 0) {
                 res.status(200).json({
-                    success: true,
-                    data: {
-                        name: "UV01",
-                        description: "Une UV vraiment très très coolax",
-                        main_res_id: 2,
-                        ressources: [
-                            {
-                                path: "/Ressource 1",
-                                id: 1
-                            },
-                            {
-                                path: "/Ressource 2",
-                                id: 1
-                            }
-                        ]
-                    }
-
-
-
-                })
-                break;
-
-            case 2:
-                res.status(200).json({
-                    success: true,
-                    data: [
-                        {
-                            path: "/Ressource 2",
-                            ext: "pdf",
-                            id: 2
-                        },
-                        {
-                            path: "/Ressource 22",
-                            ext: "pdf",
-                            id: 2
-                        }
-                    ]
-                })
-                break;
-
-            case 3:
-                res.status(200).json({
-                    success: true,
-                    data: [
-                        {
-                            path: "/Ressource 3",
-                            id: 3
-                        },
-                        {
-                            path: "/Ressource 33",
-                            id: 3
-                        }
-                    ]
-                })
-                break;
-
-            default:
-                res.status(404).json({
                     success: false,
-                    message:"The class couldn't be found or isn't available to you"
+                    message: "The class doesn't exists"
                 })
-                break;
+            } else {
+
+
+                filesData = await ezql.SELECT(pool, "ressources", ['id', 'path', 'type'], `class = ${Number(req.params.id)} ORDER BY path`)
+                
+                data[0].ressources = buildFolder(filesData);
+
+                res.status(200).json({
+                    success: true,
+                    data: data[0]
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(200).json({
+                success: false,
+                message: "An occured error in the SQL request"
+            });
         }
+
+
     } else {
         res.status(200).json({
             success: false,
@@ -294,7 +318,7 @@ app.get("/resmeta/:id", async (req, res) => {
 
         //perform authorization control
 
-        data = await ezql.SELECT(pool, "ressources", ["type", "class"], `id = ${Number(req.params.id)} `)
+        var data = await ezql.SELECT(pool, "ressources", ["id","type", "class", "path"], `id = ${Number(req.params.id)} `)
 
         if (data.length == 0) {
             res.status(200).json({
@@ -305,8 +329,10 @@ app.get("/resmeta/:id", async (req, res) => {
             res.status(200).json({
                 success: true,
                 data: {
+                    id: data[0].id,
                     type: data[0].type,
-                    class: data[0].class
+                    class: data[0].class,
+                    path: data[0].path
                 }
             })
 
@@ -330,7 +356,7 @@ app.get("/res/:resid", async (req, res) => {
         //perform authorization control
 
         try {
-            data = await ezql.SELECT(pool, "ressources", ["filename"], `id = ${Number(req.params.resid)} `)
+            var data = await ezql.SELECT(pool, "ressources", ["filename"], `id = ${Number(req.params.resid)} `)
         } catch {
             res.status(400).json({
                 success: false,
@@ -362,7 +388,7 @@ app.post("/res", async (req, res) => {
     try {
         console.log("[RES]New file upload requested");
 
-        data = req.body;
+        var data = req.body;
 
         if (verify([data.class, data.path, data.type, data.filedata]) == false) {
             throw "Bad request";

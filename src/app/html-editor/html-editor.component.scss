@@ -1,0 +1,29 @@
+:host {
+    display: inline-block;
+    width: 100%
+}
+
+.container{
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0px;
+    padding: 0px;
+    
+}
+
+editor {
+    margin: 10px;
+}
+
+.editor{
+    background-color: #232323;
+    height: 100vh;
+}
+
+.preview{
+    padding: 20px;
+    background-color:  #000000C0;
+    color: white;
+    height: 100vh;
+}

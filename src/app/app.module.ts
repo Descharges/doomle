@@ -29,6 +29,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MainappComponent } from './mainApp/mainapp.component';
 import { RegisterComponent } from './account/register/register.component';
 import { CringeComponent } from './cringe/cringe.component';
+import { RecursiveListComponent } from './mainApp/explorer/recursive-list/recursive-list.component';
+import { HtmlEditorComponent } from './html-editor/html-editor.component';
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 
 @NgModule({
@@ -44,6 +47,8 @@ import { CringeComponent } from './cringe/cringe.component';
     MainappComponent,
     RegisterComponent,
     CringeComponent,
+    RecursiveListComponent,
+    HtmlEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,9 +67,10 @@ import { CringeComponent } from './cringe/cringe.component';
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    NgbModule
+    NgbModule,
+    EditorModule
   ],
-  providers: [],
+  providers: [ { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

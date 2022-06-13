@@ -1,7 +1,7 @@
 <mat-sidenav-container autosize>
 
 
-	<mat-sidenav #sidebar mode="over" style="width:50%; background-color: #484848;" [(opened)]="sidenavOpened">
+	<mat-sidenav #sidebar position="end" mode="over" style="width:50%; background-color: #484848;" [(opened)]="sidenavOpened">
 		<img src="/assets/logo.png" style="width: 80%; margin-top: 20px;"/>
 
 		<mat-nav-list>
@@ -15,7 +15,7 @@
 
 	<mat-sidenav-content class="padded">
 		<button (click)="sidebar.toggle()" style="position: absolute; z-index: 100;"><mat-icon [inline]="true">book</mat-icon></button>
-		<app-explorer [classId]="this.classId" [resId]="this.resId" classColor="{{this.color}}"></app-explorer>
+		<app-explorer [classId]="this.classId" [resId]="this.resId"></app-explorer>
 		
 	</mat-sidenav-content>
 

@@ -10,7 +10,7 @@ import { RessourceService } from '../services/ressource.service';
 })
 export class MainappComponent implements OnInit {
 
-  classId: Number;
+  classId: number;
   resId: Number;
 
   constructor(
