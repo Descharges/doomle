@@ -19,7 +19,6 @@ export class ClassService {
   constructor(private http: HttpClient, private route: ActivatedRoute) {
 
     this.observable = new Observable(sub => {
-      console.log("AAAAAAAAAAAAAAAAAA")
       route.queryParams.subscribe( async params => {
 
         if (params['class'] == null) {

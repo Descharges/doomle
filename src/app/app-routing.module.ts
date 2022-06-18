@@ -21,10 +21,6 @@ const routes: Routes = [
   {path:"dash", component: DashboardComponent},
   {path:"app/editor", component: HtmlEditorComponent},
   {path : "class/:className", component: SidebarComponent},
-
-
-
-  
   {path:'**', redirectTo:"app"},
   
 ];

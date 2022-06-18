@@ -35,6 +35,7 @@ export class ExplorerComponent implements OnInit {
   files: any = []
   file: String = "Choissisez une ressource à afficher"
   oldDoc: number;
+  oldClass: number;
 
   Le_boule_des_filles_selon_tachikart : Observable<any>
 
@@ -44,21 +45,17 @@ export class ExplorerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
-
-
-
-
     this.dClass.observable.subscribe(data1 => {
       console.log(data1)
-      if (data1.success == true) {
+      if (data1.success == true && this.oldClass!=data1.data.id) {
         this.name = data1.data.name;
         this.description = data1.data.description;
         this.classColor = data1.data.color
         this.files = data1.data.ressources
         this.sortFiles(this.files);
+        this.oldClass = data1.data.id
 
-      } else if (data1.message != "no class selected") {
+      } else if (data1.message != "no class selected" && this.oldClass!=data1.data.id) {
         this.name = "Erreur !";
         this.description = "Le cours auxquelle vous essayer d'accéder ne vous est pas accessible ou n'existe pas";
         this.classColor = "#eb4949"

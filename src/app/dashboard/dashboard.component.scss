@@ -20,3 +20,33 @@ p{
     padding: 10px;
     margin: 10px;
 }
+.hscroll{
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+.elem{
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 1rem;
+    display: inline-block;
+    transition: 0.5s;
+}
+
+.elem:hover{
+    background-color: #484848;
+    transition: 0.5s;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.full{
+    height: 90%;
+    margin-left: -3px;
+    margin-right: -3px;
+}
+  

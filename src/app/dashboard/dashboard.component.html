@@ -4,7 +4,7 @@
             <img src="assets/logo.png" height="40" style="margin-left: 10px;" />
         </div>
         <div class="col" style="text-align: center;">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+            <input class="form-control mr-sm-2" type="search" placeholder="Rechcher un document" aria-label="Search"
                 [(ngModel)]="this.search" (ngModelChange)="onChange($event)">
         </div>
         <div class="col" style="text-align: right;">
@@ -14,15 +14,78 @@
     <div class="content search" *ngIf="this.search != '' && this.search!=null">
         <h1><b>Résultats de la recherche :</b></h1>
 
-        <div *ngFor="let el of this.results" (click)="this.navigate(el.class,el.id)" style="margin: 13px; cursor: pointer;">
+        <div *ngFor="let el of this.results" (click)="this.navigate(el.class,el.id)"
+            style="margin: 13px; cursor: pointer;">
             <p style="display:inline; padding: 5px;padding-left: 8px;padding-right: 8px; border-radius: 1rem;"
                 [ngStyle]="{'background-color':el.color}">{{el.classname}}</p>
             <p style="display:inline; margin-left: 5px;">{{el.path.replaceAll("/", " > ")}}</p>
         </div>
     </div>
-    <div class="content">
-        <h1><b>Bonjour, Paul !</b></h1>
-        <h6><i class="fa-solid fa-lightbulb"></i> Astuce du jour : Pendant les révisions, pense bien à t'hydrater
-            régulièrement !</h6>
+
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-sm">
+                <div class="content full">
+                    <h1><b>Bonjour, Paul !</b></h1>
+                    <h6><i class="fa-solid fa-lightbulb"></i> Astuce du jour : Pendant les révisions, pense bien à
+                        t'hydrater
+                        régulièrement !</h6>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="content full">
+                    <h1>Devoirs à venir</h1>
+                    <div style="margin: 13px; cursor: pointer;text-overflow: ellipsis;">
+                        <p style="display:inline; padding: 5px;padding-left: 8px;padding-right: 8px; border-radius: 1rem;"
+                            [ngStyle]="{'background-color':'salmon'}">SI40</p>
+                        <p style="display:inline; padding: 5px;padding-left: 8px;padding-right: 8px; border-radius: 1rem; margin-left: 5px;"
+                            [ngStyle]="{'background-color':'grey'}">Mardi 4 novembre</p>
+                        <p style="display:inline; margin-left: 5px;">TP 4 à rendre</p>
+                    </div>
+
+                    <div style="margin: 13px; cursor: pointer;text-overflow: ellipsis;">
+                        <p style="display:inline; padding: 5px;padding-left: 8px;padding-right: 8px; border-radius: 1rem;"
+                            [ngStyle]="{'background-color':'deepskyblue'}">HM40</p>
+                        <p style="display:inline; padding: 5px;padding-left: 8px;padding-right: 8px; border-radius: 1rem; margin-left: 5px;"
+                            [ngStyle]="{'background-color':'grey'}">Jeudi 6 Novembre</p>
+                        <p style="display:inline; margin-left: 5px;">Finir le rapport du TP QFitts, se préparer à la
+                            soutenance</p>
+                    </div>
+
+                    <div style="margin: 13px; cursor: pointer;text-overflow: ellipsis;">
+                        <p style="display:inline; padding: 5px;padding-left: 8px;padding-right: 8px; border-radius: 1rem;"
+                            [ngStyle]="{'background-color':'darkgreen'}">SP07</p>
+                        <p style="display:inline; padding: 5px;padding-left: 8px;padding-right: 8px; border-radius: 1rem; margin-left: 5px;"
+                            [ngStyle]="{'background-color':'grey'}">Jeudi 6 Novembre</p>
+                        <p style="display:inline; margin-left: 5px;text-overflow: ellipsis;">Présentation sur le dopage</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
+
+
+
+
+
+    <div class="content">
+        <h1>Matières</h1>
+
+        <div class="hscroll">
+            <div class="elem" *ngFor="let el of this.classes.classes" style="width:300px;"
+                [ngStyle]="{'color' : el.color}" (click)="this.router.navigateByUrl('/app?class='+el.id)">
+                <h2 style="margin-left: 20px; margin-bottom: -10px;">{{el.name}}</h2>
+                <div style="margin: 10px; padding: 10px; border-radius: 20px; border-width: 1px; border:3px solid;">
+                    <p style="margin-left:0px; color: white; white-space: normal;">{{el.description}}</p>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
 </div>
