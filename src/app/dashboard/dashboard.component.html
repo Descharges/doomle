@@ -1,0 +1,28 @@
+<div class="dashboard">
+    <div class="navbar">
+        <div class="col">
+            <img src="assets/logo.png" height="40" style="margin-left: 10px;" />
+        </div>
+        <div class="col" style="text-align: center;">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                [(ngModel)]="this.search" (ngModelChange)="onChange($event)">
+        </div>
+        <div class="col" style="text-align: right;">
+            <button type="button" class="btn btn-danger" style="margin-right: 10px;">Déconnexion</button>
+        </div>
+    </div>
+    <div class="content search" *ngIf="this.search != '' && this.search!=null">
+        <h1><b>Résultats de la recherche :</b></h1>
+
+        <div *ngFor="let el of this.results" (click)="this.navigate(el.class,el.id)" style="margin: 13px; cursor: pointer;">
+            <p style="display:inline; padding: 5px;padding-left: 8px;padding-right: 8px; border-radius: 1rem;"
+                [ngStyle]="{'background-color':el.color}">{{el.classname}}</p>
+            <p style="display:inline; margin-left: 5px;">{{el.path.replaceAll("/", " > ")}}</p>
+        </div>
+    </div>
+    <div class="content">
+        <h1><b>Bonjour, Paul !</b></h1>
+        <h6><i class="fa-solid fa-lightbulb"></i> Astuce du jour : Pendant les révisions, pense bien à t'hydrater
+            régulièrement !</h6>
+    </div>
+</div>

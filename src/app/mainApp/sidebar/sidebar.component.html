@@ -1,20 +1,27 @@
 <mat-sidenav-container autosize>
 
 
-	<mat-sidenav #sidebar position="end" mode="over" style="width:50%; background-color: #484848;" [(opened)]="sidenavOpened">
-		<img src="/assets/logo.png" style="width: 80%; margin-top: 20px;"/>
+	<mat-sidenav #sidebar position="end" mode="side" style="background-color: #121212;" [(opened)]="sidenavOpened">
+		<img src="/assets/logo.png" style="width: 100px; margin-top: 20px;margin-bottom: 20px;"/>
 
-		<mat-nav-list>
-			<mat-list-item *ngFor="let class of classList" (click)="selectClass(class)">
-				{{class.name}}
-			</mat-list-item>
-		</mat-nav-list>
+		<div class="class" style="background-color: #232323;" (click)="this.router.navigateByUrl('/dash')" >
+			<h3 style="margin-bottom: 0px;color: white;">Mon dashboard</h3>
+		</div>
+
+		<hr style="margin-left: 50px;"/>
+
+		<div *ngFor="let el of this.classes.classes" class="class" [ngStyle]="{'background-color':el.color, 'color':el.color}" (click)="this.router.navigateByUrl('/app?class='+el.id)" >
+			<h3 style="margin-bottom: 0px;">{{el.name}}</h3>
+		</div>
+
+
+
 	</mat-sidenav>
 
 
 
 	<mat-sidenav-content class="padded">
-		<button (click)="sidebar.toggle()" style="position: absolute; z-index: 100;"><mat-icon [inline]="true">book</mat-icon></button>
+		<button (click)="sidebar.toggle()" style="z-index: 100;"><i class="fa-solid fa-book" style="color: white;"></i> Cours </button>
 		<app-explorer [classId]="this.classId" [resId]="this.resId"></app-explorer>
 		
 	</mat-sidenav-content>

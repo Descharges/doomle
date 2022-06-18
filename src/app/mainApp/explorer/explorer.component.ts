@@ -34,6 +34,7 @@ export class ExplorerComponent implements OnInit {
   description: String = "Bienvenue sur Doomle ! Pour commencer, veuillez choisir un cours"
   files: any = []
   file: String = "Choissisez une ressource à afficher"
+  oldDoc: number;
 
   Le_boule_des_filles_selon_tachikart : Observable<any>
 
@@ -42,6 +43,8 @@ export class ExplorerComponent implements OnInit {
   constructor(private dClass: ClassService, private cDoc: CurrentdocService) { }
 
   ngOnInit(): void {
+
+    
 
 
 
@@ -66,8 +69,10 @@ export class ExplorerComponent implements OnInit {
     this.cDoc.observable.subscribe(data2 =>{
       console.log(data2)
       if(data2.success == true){
+        this.oldDoc = data2.data.id
         this.file = data2.data.path.replaceAll("/", " > ")
       }
+      //TODO: Implement a way to keep the last checked document in memory
     })
 
 

@@ -32,6 +32,8 @@ import { CringeComponent } from './cringe/cringe.component';
 import { RecursiveListComponent } from './mainApp/explorer/recursive-list/recursive-list.component';
 import { HtmlEditorComponent } from './html-editor/html-editor.component';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ClassService } from './services/class.service';
 
 
 @NgModule({
@@ -49,6 +51,7 @@ import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
     CringeComponent,
     RecursiveListComponent,
     HtmlEditorComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,7 @@ import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
     NgbModule,
     EditorModule
   ],
-  providers: [ { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' } ],
+  providers: [ { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

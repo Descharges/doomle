@@ -7,6 +7,7 @@ import { RegisterComponent } from './account/register/register.component';
 import { CringeComponent } from './cringe/cringe.component';
 import { ExplorerComponent } from './mainApp/explorer/explorer.component';
 import { HtmlEditorComponent } from './html-editor/html-editor.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {path:"auth", children:[
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:"register", redirectTo:"auth/register"},
   {path:"cringe", component:CringeComponent},
   {path:"app", component: MainappComponent},
+  {path:"dash", component: DashboardComponent},
   {path:"app/editor", component: HtmlEditorComponent},
   {path : "class/:className", component: SidebarComponent},
 

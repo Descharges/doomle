@@ -233,33 +233,16 @@ app.get("/user", async (req, res) => {
 
 });
 
+
+
 app.get("/classes", async (req, res) => {
-    if (req.session.logged) {
+    if (req.session.logged || DEBUG) {
+
+
+        var data = await ezql.SELECT(pool, "class",[]);
         res.status(200).json({
             success: true,
-            data: [
-                {
-                    name: "UV01",
-                    id: 1,
-                    description: "UV numéro 1",
-                    color: "#e29deb",
-                    main_res_id: 1
-                },
-                {
-                    name: "UV02",
-                    id: 2,
-                    description: "UV numéro 2",
-                    color: "#b1eb9d",
-                    main_res_id: 2
-                },
-                {
-                    name: "UV03",
-                    id: 3,
-                    description: "UV numéro 3",
-                    color: "#9dc8eb",
-                    main_res_id: 3
-                },
-            ]
+            data: data
         })
     } else {
         res.status(200).json({
@@ -269,6 +252,8 @@ app.get("/classes", async (req, res) => {
     }
 
 });
+
+
 
 app.get("/class/:id", async (req, res) => {
     console.log("[REQ] class requested :" + req.params.id)
@@ -300,6 +285,39 @@ app.get("/class/:id", async (req, res) => {
                 message: "An occured error in the SQL request"
             });
         }
+
+
+    } else {
+        res.status(200).json({
+            success: false,
+            message: "Not logged in"
+        });
+    }
+
+});
+
+app.get("/searchres/:search", async (req, res) => {
+    console.log("[REQ] File search :" + req.params.search)
+    if (req.session.logged || DEBUG) {
+
+        //perform authorization control
+
+        var data = await ezql.SELECT(pool, "ressources AS res INNER JOIN class ON res.class = class.id",
+            ["res.id", "res.type", "res.class", "res.path", "class.name as classname", "class.color"], `path LIKE "%${req.params.search}%"`)
+
+        if (data.length == 0) {
+            res.status(200).json({
+                success: false,
+                message: "The file couldn't be found"
+            })
+        } else {
+            res.status(200).json({
+                success: true,
+                data: data
+            })
+
+        }
+
 
 
     } else {

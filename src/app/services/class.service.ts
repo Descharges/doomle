@@ -19,6 +19,7 @@ export class ClassService {
   constructor(private http: HttpClient, private route: ActivatedRoute) {
 
     this.observable = new Observable(sub => {
+      console.log("AAAAAAAAAAAAAAAAAA")
       route.queryParams.subscribe( async params => {
 
         if (params['class'] == null) {
@@ -26,13 +27,12 @@ export class ClassService {
             success: false,
             message: "no class selected"
           })
-        } else if (this.oldParam != params['class']) {
+        } else {
           sub.next(await firstValueFrom(this.http.get("/api/class/" + params['class'], {
             observe: "body",
             withCredentials: true,
             responseType: "json"
           })))
-          this.oldParam = params['class']
         }
       })
     })
