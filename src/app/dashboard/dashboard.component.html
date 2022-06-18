@@ -78,14 +78,14 @@
         <div class="hscroll">
             <div class="elem" *ngFor="let el of this.classes.classes" style="width:300px;"
                 [ngStyle]="{'color' : el.color}" (click)="this.router.navigateByUrl('/app?class='+el.id)">
-                <h2 style="margin-left: 20px; margin-bottom: -10px;">{{el.name}}</h2>
+                <h2 style="margin-left: 20px; margin-bottom: -5px;">{{el.name}}</h2>
                 <div style="margin: 10px; padding: 10px; border-radius: 20px; border-width: 1px; border:3px solid;">
                     <p style="margin-left:0px; color: white; white-space: normal;">{{el.description}}</p>
                 </div>
 
             </div>
 
-            <div *ngIf="this.user.data.type == 'teacher'" class="elem" style="width:300px; color: gray;" (click)="this.router.navigateByUrl('/dash')">
+            <div *ngIf="this.user.data.type == 'teacher'" class="elem" style="width:300px; color: gray;" (click)="this.showform=true">
                 <h2 style="margin-left: 20px; margin-bottom: -10px;">Nouvelle matière</h2>
                 <div style="margin: 10px; padding: 10px; border-radius: 20px; border-width: 1px; border:3px solid;">
                     <p style="margin-left:0px; color: white; white-space: normal;">Cliquez ici pour ajouter une nouvelle matière</p>
@@ -95,6 +95,25 @@
         </div>
 
 
+    </div>
+
+    <div class="content" style="width: 500px;" *ngIf="this.user.data.type=='teacher' && this.showform==true">
+        <h1>Crée un cours</h1>
+        <form>
+            <div class="form-group">
+              <label for="name">Nom</label>
+              <input type="text" class="form-control" id="name" [(ngModel)]="this.newClass.name" name="name">
+              <br/>
+              <label for="desc">Description</label>
+              <input type="text" class="form-control" [(ngModel)]="this.newClass.description" name="description">
+              <br/>
+              <label for="desc" style="vertical-align:top;">Couleur : </label>
+              <input type="color" style="width: 50px; height: 50px; margin-left: 5px;" [(ngModel)]="this.newClass.color" name="color">
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-primary" (click)="this.addClass()">Créer la matière</button>
+            <button type="submit" class="btn btn-danger" style="margin-left: 5px;" (click)="this.showform=false">Annuler</button>
+          </form>
     </div>
 
 </div>

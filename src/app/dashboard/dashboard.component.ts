@@ -15,6 +15,14 @@ export class DashboardComponent implements OnInit {
   search: string;
   results: any[] = [];
 
+
+  showform: boolean = false;
+  newClass: any = {
+    name:"",
+    description:"",
+    color:""
+  };
+
   constructor(
     private http: HttpClient,
     public router: Router,
@@ -37,6 +45,20 @@ export class DashboardComponent implements OnInit {
       }))
 
       this.results = (data as any).data
+    }
+
+  }
+
+  async addClass(){
+    if(this.newClass.name!="" && this.newClass.description!="" && this.newClass.color!=""){
+      var data = await firstValueFrom(this.http.post("/api/class",this.newClass,{
+        observe: "body",
+        withCredentials: true,
+        responseType: "json"
+      }))
+      this.classes.update()
+    }else{
+      alert("Remplissez toutes les sections !")
     }
 
   }
