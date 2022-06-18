@@ -4,7 +4,7 @@
         <i class="fa-solid fa-folder fa-lg"></i>
         <span class="button-text"><b>Mes ressources</b></span>
     </button>
-    <span id="title"><b>          {{this.name}}  >  </b>{{this.file}}</span>
+    <span id="title"><b> {{this.name}} > </b>{{this.file}}</span>
 </div>
 
 
@@ -25,8 +25,14 @@
         <div
             style="margin: 10px; padding: 10px; border-radius: 20px; background-color: #232323; color: lightgray; list-style: none;">
 
-            <app-recursive-list [folder]="this.files" [classId]="this.classId" [color]="this.classColor"></app-recursive-list>
+            <app-recursive-list [folder]="this.files" [classId]="this.classId" [color]="this.classColor">
+            </app-recursive-list>
 
+        </div>
+
+        <div *ngIf="this.user.data.type == 'teacher'" class="edit" style="border-radius: 20px; background-color: #242424;
+        text-align: center; padding: 10px; margin: 10px; transition: 0.5s; cursor: pointer;">
+            <p style="margin-left:0px; color: white;">Passer en mode édition</p>
         </div>
 
         <!--

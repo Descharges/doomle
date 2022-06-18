@@ -10,6 +10,7 @@ const fs = require("fs");
 
 const ezql = require("./ezql.js");
 const { ObjectUnsubscribedError } = require("rxjs");
+const { debug } = require("console");
 
 const DEBUG = true;
 
@@ -236,10 +237,10 @@ app.get("/user", async (req, res) => {
 
 
 app.get("/classes", async (req, res) => {
-    if (req.session.logged || DEBUG) {
+    if (req.session.logged) {
 
 
-        var data = await ezql.SELECT(pool, "class",[]);
+        var data = await ezql.SELECT(pool, "class LEFT JOIN inscription ON class.id = inscription.classid",[],"userid="+req.session.user.id);
         res.status(200).json({
             success: true,
             data: data
@@ -253,6 +254,43 @@ app.get("/classes", async (req, res) => {
 
 });
 
+app.post("/class", async (req, res)=>{
+    if((req.session.logged && req.session.user.type=="teacher")){
+        data = req.body;
+        if (verify([data.name, data.description, data.color]) != false) {
+            var result = await ezql.INSERT(pool, "class",[
+                {c:"name", v:data.name},
+                {c:"description", v:data.description},
+                {c:"color", v:data.color},
+            ]," RETURNING id")
+            res.status(200).json({
+                success: true,
+            })
+
+            ezql.INSERT(pool, "inscription", [
+                {c:"userid", v:req.session.user.id},
+                {c:"classid", v:result[0].id},
+                {c:"isFav", v:0},
+                {c:"isArchived", v:0},
+            ])
+
+
+            console.log(result[0].id)
+
+        }else{
+            res.status(200).json({
+                success: false,
+                message: "Bad request"
+            })
+        }
+    }else{
+        res.status(200).json({
+            success: false,
+            message: "Not logged in or not a teacher"
+        })
+    }
+})
+
 
 
 app.get("/class/:id", async (req, res) => {
@@ -260,7 +298,7 @@ app.get("/class/:id", async (req, res) => {
     if (req.session.logged || DEBUG) {
 
         try {
-            var data = await ezql.SELECT(pool, "class", [], `id = ${Number(req.params.id)}`)
+            var data = await ezql.SELECT(pool, "class LEFT JOIN inscription ON class.id = inscription.classid", [], `id = ${Number(req.params.id)} AND userid=${req.session.user.id}`)
             if (data.length == 0) {
                 res.status(200).json({
                     success: false,

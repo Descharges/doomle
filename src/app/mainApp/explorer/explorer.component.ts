@@ -6,6 +6,7 @@ import { Ressource } from 'src/objectClass/Ressource';
 import { ClassService } from 'src/app/services/class.service';
 import { Observable } from 'rxjs';
 import { CurrentdocService } from 'src/app/services/currentdoc.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 
@@ -41,7 +42,7 @@ export class ExplorerComponent implements OnInit {
 
 
 
-  constructor(private dClass: ClassService, private cDoc: CurrentdocService) { }
+  constructor(private dClass: ClassService, private cDoc: CurrentdocService, public user: UserService) { }
 
   ngOnInit(): void {
 
@@ -55,7 +56,7 @@ export class ExplorerComponent implements OnInit {
         this.sortFiles(this.files);
         this.oldClass = data1.data.id
 
-      } else if (data1.message != "no class selected" && this.oldClass!=data1.data.id) {
+      } else if (data1.message != "no class selected" && (this.oldClass == null || this.oldClass!=data1.data.id)) {
         this.name = "Erreur !";
         this.description = "Le cours auxquelle vous essayer d'accéder ne vous est pas accessible ou n'existe pas";
         this.classColor = "#eb4949"

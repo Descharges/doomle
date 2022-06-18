@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    
     if (await this.log.checkAlive() == false){
       this.router.navigate(["/cringe"]);
     };
@@ -32,9 +33,8 @@ export class LoginComponent implements OnInit {
     if(login == null){
       this.login = "err";
     } else if(login){
-      this.login = "succ"
-      this.router.navigate([""]);
-      
+      this.login = "succ";
+      this.router.navigateByUrl("/dash");
     }else{
       this.login = "fail"
     }

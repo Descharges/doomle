@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { UserClassesService } from '../services/user-classes.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,10 +15,18 @@ export class DashboardComponent implements OnInit {
   search: string;
   results: any[] = [];
 
-  constructor(private http: HttpClient, public router: Router, public classes: UserClassesService) { }
+  constructor(
+    private http: HttpClient,
+    public router: Router,
+    public classes: UserClassesService,
+    public user: UserService){ }
 
   ngOnInit(): void {
+    this.user.update()
+    this.classes.update()
   }
+
+
 
   async onChange(n: string) {
     if (n != "") {

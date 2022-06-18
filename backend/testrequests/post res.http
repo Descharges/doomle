@@ -1,9 +1,8 @@
-POST http://localhost:8080/res HTTP/1.1
+POST http://localhost:8080/class HTTP/1.1
 content-Type: application/json
 
 {
-  "class" : "1",
-  "path" : "html 1",
-  "type" : ".html",
-  "filedata" : "PGgxPkhlbGxvIHRoZXJlICE8L2gxPgo8cD5JJ20gdHJ5aW5nIHNvbWV0aGluZyBoZXJlIDspPC9wPg=="
+  "name":"SY43",
+  "description":"UV de développement Android, délicieusement gérer par Brisset Bebou",
+  "color":"#ff9130"
 }

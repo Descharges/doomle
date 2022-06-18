@@ -1,3 +1,5 @@
+const { query } = require("express");
+
 //SELECT * FROM user WHERE mail = "${req.body.username}";`
 module.exports = {
     SELECT: async (pool, table, arr, where) => {
@@ -26,8 +28,8 @@ module.exports = {
 
     //const query = `INSERT INTO user (pseudo, name, fam_name, mail, password, type) \
     //VALUES  ("${pseudo}", "${req.body.name}", "${req.body.fam_name}", "${req.body.mail}", "${await bcrypt.hash(req.body.password, 10)}", "student");`;
-    INSERT: async (pool, table, arr,) => { 
-        query = "INSERT INTO " + table + " ("
+    INSERT: async (pool, table, arr, toAdd) => { 
+        var query = "INSERT INTO " + table + " ("
 
         arr.forEach(el => {
             query += el.c + ", "
@@ -36,7 +38,13 @@ module.exports = {
         arr.forEach(el => {
             query += "\"" + el.v + "\", "
         });
-        query = query.slice(0, -2) + ");";
+        query = query.slice(0, -2) + ")";
+
+        if(toAdd != undefined){
+            query += toAdd;
+        }
+        query += ";"
+
 
 
         console.log("[SQL] Running query : " + query)

@@ -8,7 +8,8 @@
                 [(ngModel)]="this.search" (ngModelChange)="onChange($event)">
         </div>
         <div class="col" style="text-align: right;">
-            <button type="button" class="btn btn-danger" style="margin-right: 10px;">Déconnexion</button>
+            <p style="display: inline;"><i class="fa-solid fa-user"></i> {{this.user.data.pseudo}} ({{this.user.data.type}})   </p>
+            <button type="button" class="btn btn-danger" style="margin-right: 10px;" (click)="this.user.logout()">Déconnexion</button>
         </div>
     </div>
     <div class="content search" *ngIf="this.search != '' && this.search!=null">
@@ -26,8 +27,8 @@
         <div class="row no-gutters">
             <div class="col-sm">
                 <div class="content full">
-                    <h1><b>Bonjour, Paul !</b></h1>
-                    <h6><i class="fa-solid fa-lightbulb"></i> Astuce du jour : Pendant les révisions, pense bien à
+                    <h1><b>Bonjour, {{this.user.data.name}} !</b></h1>
+                    <h6 *ngIf="this.user.data.type != 'teacher'"><i class="fa-solid fa-lightbulb"></i> Astuce du jour : Pendant les révisions, pense bien à
                         t'hydrater
                         régulièrement !</h6>
                 </div>
@@ -80,6 +81,14 @@
                 <h2 style="margin-left: 20px; margin-bottom: -10px;">{{el.name}}</h2>
                 <div style="margin: 10px; padding: 10px; border-radius: 20px; border-width: 1px; border:3px solid;">
                     <p style="margin-left:0px; color: white; white-space: normal;">{{el.description}}</p>
+                </div>
+
+            </div>
+
+            <div *ngIf="this.user.data.type == 'teacher'" class="elem" style="width:300px; color: gray;" (click)="this.router.navigateByUrl('/dash')">
+                <h2 style="margin-left: 20px; margin-bottom: -10px;">Nouvelle matière</h2>
+                <div style="margin: 10px; padding: 10px; border-radius: 20px; border-width: 1px; border:3px solid;">
+                    <p style="margin-left:0px; color: white; white-space: normal;">Cliquez ici pour ajouter une nouvelle matière</p>
                 </div>
 
             </div>
