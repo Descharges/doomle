@@ -1,14 +1,113 @@
-<div class="container">
-    <div class="editor">
-        <editor [(ngModel)]="html" (onSaveContent)="test()" [init]="{
-            skin: 'oxide-dark',
-            content_css: 'dark',
-            menubar: false,
-            base_url: '/tinymce',
-            suffix: '.min',
-            plugins: 'lists link image table code help wordcount',
-            toolbar: 'undo redo | code h1 h2 h3 | bold italic | alignleft aligncenter alignright alignjustify | forecolor lists'
-        }"></editor>
+<div class="dashboard" style="overflow-y: scroll;">
+    <h1><b>Éditeur de matière</b></h1> <button type="submit" class="btn btn-danger" style="position:absolute;top: 15px;right: 10px;">Terminer</button>
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-sm">
+                <div class="content full">
+                    <h3>Modifier les attributs :</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                            <br />
+                            <label for="desc">Description</label>
+                            <input type="text" class="form-control" name="description">
+                            <br />
+                            <label for="desc" style="vertical-align:top;">Couleur : </label>
+                            <input type="color" style="width: 50px; height: 50px; margin-left: 5px;" name="color">
+                        </div>
+                        <br />
+                        <button type="submit" class="btn btn-primary" style="transform: translateY(-15px);">Modifier la
+                            matière</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="content full">
+                    <h3>Inscrire des elèves :</h3>
+                    <div
+                        style="background-color: #484848; height: 200px; overflow-y: scroll; border-radius: 1rem; padding: 10px;">
+                        <ul>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+
+                        </ul>
+                    </div>
+                    <br/>
+                    <form>
+                        <label for="name">Inscrire un utilisateur</label><br/>
+                        <input type="text" id="username" name="username" style="margin-right: 10px;">
+                        <button type="submit" class="btn btn-primary">+</button>
+                    </form>
+
+
+                    <br/>
+                </div>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-sm">
+                <div class="content full">
+                    <h3>Supprimer des ressources :</h3>
+                    <div
+                        style="background-color: #484848; height: 300px; overflow-y: scroll; border-radius: 1rem; padding: 10px; margin-bottom: 10px;">
+                        <ul>
+                            <li>CM > CM1 (.pdf) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>CM > CM2 (.pdf) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>CM > CM3 (.pdf) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+                            <li>Présentation de l'UV (.pdf) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="content full">
+                    <h3>Ajouter des ressources :</h3>
+                    <p>Alexis fais ta magie ici :)</p>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="preview" [innerHtml]="this.sanitizer.bypassSecurityTrustHtml(this.html)"></div>
+    <div class="content">
+        <h3>Écrire un cours :</h3>
+        <div class="editor">
+            <editor [(ngModel)]="html" (onSaveContent)="test()" [init]="{
+                skin: 'oxide-dark',
+                content_css: 'dark',
+                menubar: false,
+                base_url: '/tinymce',
+                suffix: '.min',
+                plugins: 'lists link image table code help wordcount',
+                toolbar: 'undo redo | code h1 h2 h3 | bold italic | alignleft aligncenter alignright alignjustify | forecolor lists'
+            }"></editor>
+        </div>
+        <form>
+            <label for="name">Chemin du fichier :</label><br/>
+            <input type="text" id="path" name="path" style="margin-right: 10px;">
+            <button type="submit" class="btn btn-primary">+</button>
+        </form>
+    </div>
+
+
+
 </div>

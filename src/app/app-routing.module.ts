@@ -19,7 +19,7 @@ const routes: Routes = [
   {path:"cringe", component:CringeComponent},
   {path:"app", component: MainappComponent},
   {path:"dash", component: DashboardComponent},
-  {path:"app/editor", component: HtmlEditorComponent},
+  {path:"editor", component: HtmlEditorComponent},
   {path : "class/:className", component: SidebarComponent},
   {path:'**', redirectTo:"app"},
   
