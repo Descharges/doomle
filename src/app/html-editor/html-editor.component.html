@@ -1,5 +1,6 @@
 <div class="dashboard" style="overflow-y: scroll;">
-    <h1><b>Éditeur de matière</b></h1> <button type="submit" class="btn btn-danger" style="position:absolute;top: 15px;right: 10px;">Terminer</button>
+    <h1><b>Éditeur de matière : <span [ngStyle]="{'color':this.clasColor}">{{this.className}}</span></b></h1> <button
+        type="submit" class="btn btn-danger" style="position:absolute;top: 15px;right: 10px;" (click)="this.leave()">Terminer</button>
     <div class="container-fluid">
         <div class="row no-gutters">
             <div class="col-sm">
@@ -8,17 +9,20 @@
                     <form>
                         <div class="form-group">
                             <label for="name">Nom</label>
-                            <input type="text" class="form-control" id="name" name="name">
+                            <input type="text" class="form-control" id="name" name="name"
+                                [(ngModel)]="this.section1.name">
                             <br />
                             <label for="desc">Description</label>
-                            <input type="text" class="form-control" name="description">
+                            <input type="text" class="form-control" name="description"
+                                [(ngModel)]="this.section1.description">
                             <br />
                             <label for="desc" style="vertical-align:top;">Couleur : </label>
-                            <input type="color" style="width: 50px; height: 50px; margin-left: 5px;" name="color">
+                            <input type="color" style="width: 50px; height: 50px; margin-left: 5px;" name="color"
+                                [(ngModel)]="this.section1.color">
                         </div>
                         <br />
-                        <button type="submit" class="btn btn-primary" style="transform: translateY(-15px);">Modifier la
-                            matière</button>
+                        <button type="submit" class="btn btn-primary" style="transform: translateY(-15px);"
+                            (click)="this.Dclass.modifyClass(this.classId,this.section1);this.update()">Modifier la matière</button>
                     </form>
                 </div>
             </div>
@@ -28,38 +32,20 @@
                     <div
                         style="background-color: #484848; height: 200px; overflow-y: scroll; border-radius: 1rem; padding: 10px;">
                         <ul>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Paul Caillier (pcaillie) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-
+                            <li *ngFor="let el of this.Dclass.users">{{el.name}} {{el.fam_name}} ({{el.pseudo}}) 
+                                <i *ngIf="el.id != this.user.data.id" (click)="this.rmUser(el.id)" class="fa-solid fa-xmark fa-lg" style="color: red; cursor: pointer;"></i></li>
                         </ul>
                     </div>
-                    <br/>
+                    <br />
                     <form>
-                        <label for="name">Inscrire un utilisateur</label><br/>
-                        <input type="text" id="username" name="username" style="margin-right: 10px;">
-                        <button type="submit" class="btn btn-primary">+</button>
+                        <label for="name">Inscrire un utilisateur</label><br />
+                        <input type="text" id="username" name="username" style="margin-right: 10px;" [(ngModel)]="this.section2.user">
+                        <button type="submit" class="btn btn-primary" (click)="addUser()">+</button>
                     </form>
+                    <p *ngIf="this.section2.err != ''" style="color: red;">Une erreur a eu lieu : {{this.section2.err}}</p>
 
 
-                    <br/>
+                    <br />
                 </div>
             </div>
         </div>
@@ -68,14 +54,9 @@
                 <div class="content full">
                     <h3>Supprimer des ressources :</h3>
                     <div
-                        style="background-color: #484848; height: 300px; overflow-y: scroll; border-radius: 1rem; padding: 10px; margin-bottom: 10px;">
-                        <ul>
-                            <li>CM > CM1 (.pdf) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>CM > CM2 (.pdf) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>CM > CM3 (.pdf) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-                            <li>Présentation de l'UV (.pdf) <i class="fa-solid fa-xmark" style="color: red;"></i></li>
-
-                        </ul>
+                        style="background-color: #484848; height: 300px; overflow-y: scroll; border-radius: 1rem; padding: 10px; margin-bottom: 20px;">
+                        <app-recursive-list [folder]="this.section3" [classId]="this.classId" [color]="this.clasColor"
+                            [edit]="true"></app-recursive-list>
                     </div>
                 </div>
             </div>
@@ -91,7 +72,7 @@
     <div class="content">
         <h3>Écrire un cours :</h3>
         <div class="editor">
-            <editor [(ngModel)]="html" (onSaveContent)="test()" [init]="{
+            <editor [(ngModel)]="html" [init]="{
                 skin: 'oxide-dark',
                 content_css: 'dark',
                 menubar: false,
@@ -102,9 +83,9 @@
             }"></editor>
         </div>
         <form>
-            <label for="name">Chemin du fichier :</label><br/>
-            <input type="text" id="path" name="path" style="margin-right: 10px;">
-            <button type="submit" class="btn btn-primary">+</button>
+            <label for="name">Chemin du fichier :</label><br />
+            <input type="text" id="path" name="path" style="margin-right: 10px;" [(ngModel)]="this.section5.path">
+            <button type="submit" class="btn btn-primary" (click)="this.uploadHTML()">+</button>
         </form>
     </div>
 

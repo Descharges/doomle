@@ -30,7 +30,7 @@
 
         </div>
 
-        <div *ngIf="this.user.data.type == 'teacher'" class="edit" style="border-radius: 20px; background-color: #242424;
+        <div (click)="this.router.navigateByUrl('/editor?class='+this.classId)" *ngIf="this.user.data.type == 'teacher'" class="edit" style="border-radius: 20px; background-color: #242424;
         text-align: center; padding: 10px; margin: 10px; transition: 0.5s; cursor: pointer;">
             <p style="margin-left:0px; color: white;">Passer en mode édition</p>
         </div>
