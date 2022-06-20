@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    
+
     <div class="dropdown mb-3">
       <select name="class" class="btn btn-secondary dropdown-toggle" [(ngModel)]="this.res.type">
           <option value="" disabled>Format de la ressource</option>
@@ -33,6 +33,6 @@
       <input type="file" (change)="onFileSelected($event)" />
     </div>
     
-    <input type="submit" class="btn btn-primary"  value="Ajouter la ressource"/>
+    <input type="submit" class="btn btn-primary"  value="Ajouter la ressource" [ngStyle]="{'background-color' : this.color}"/>
 
 </form>

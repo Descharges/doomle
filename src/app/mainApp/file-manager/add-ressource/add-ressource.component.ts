@@ -39,8 +39,8 @@ export class AddRessourceComponent implements OnInit {
       console.log("test explorer component")
     })
 
-    this.res.class = this.classId;
-     
+  
+
   }
 
   //Convert to base 64
@@ -55,13 +55,13 @@ export class AddRessourceComponent implements OnInit {
 
   async addRessource(){
 
-    // Chopper le classId de html editor
     console.log("addressource - res = " +  this.res)
     this.res.path += "/" + this.res.filename
+    this.res.class = this.classId;
+
     this.ressourceService.addRessource(this.res)
-
-    console.log(this.res)
-
+    
+    //Empty fields
     this.res = new Ressource();
 
   }

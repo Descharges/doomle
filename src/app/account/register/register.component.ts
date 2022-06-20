@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { CheckloginService } from '../../services/checklogin.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
   status: string;
 
 
-  constructor(private log: CheckloginService) { }
+  constructor(private log: CheckloginService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -38,7 +39,8 @@ export class RegisterComponent implements OnInit {
         this.pwd.nativeElement.value
       )).toString();
       this.status = "true"
-      console.log(this.status)
+      setTimeout(()=>{this.router.navigateByUrl("/auth/login");}, 1000)
+      
     }
 
 

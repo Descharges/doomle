@@ -31,12 +31,17 @@ export class MainViewComponent implements OnInit {
     this.cDoc.observable.subscribe(async data => {
 
       if (data.success == false) {
-        this.type = "none"
-        this.text = "Une erreur a eu lieu : \"" + data.message + "\" :(";
+
+        if(data.message == "no ressource selected"){
+          this.type = "none"
+          this.text = "Bienvenue sur Doomle ! Pour commencer, choissisez une ressource à afficher."
+        }else{
+          this.type = "none"
+          this.text = "Une erreur a eu lieu : \"" + data.message + "\" :(";
+        }
       } else {
         this.type = data.data.type
         this.stringUrl = "http://localhost:4200/api/res/" + data.data.id
-        this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.stringUrl);
 
         switch (this.type) {
           case ".pdf":
@@ -48,13 +53,11 @@ export class MainViewComponent implements OnInit {
           case ".txt":
 
             this.text = await firstValueFrom(this.http.get(this.stringUrl, { responseType: 'text' }))
-            console.log(this.text)
             break;
 
           case ".html":
 
             this.text = await firstValueFrom(this.http.get(this.stringUrl, { responseType: 'text' }))
-            console.log(this.text)
             this.safeHtml = this.sanitizer.bypassSecurityTrustHtml(this.text)
             break;
 

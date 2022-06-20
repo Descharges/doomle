@@ -1,6 +1,7 @@
 <div class="dashboard" style="overflow-y: scroll;">
     <h1><b>Éditeur de matière : <span [ngStyle]="{'color':this.clasColor}">{{this.className}}</span></b></h1> <button
-        type="submit" class="btn btn-danger" style="position:absolute;top: 15px;right: 10px;" (click)="this.leave()">Terminer</button>
+        type="submit" class="btn btn-danger" style="position:absolute;top: 15px;right: 10px;"
+        (click)="this.leave()">Terminer</button>
     <div class="container-fluid">
         <div class="row no-gutters">
             <div class="col-sm">
@@ -17,12 +18,15 @@
                                 [(ngModel)]="this.section1.description">
                             <br />
                             <label for="desc" style="vertical-align:top;">Couleur : </label>
-                            <input type="color" style="width: 50px; height: 50px; margin-left: 5px;" name="color"
+                            <input type="color" style="width: 50px; height: 30px; margin-left: 5px;
+                            background-color: transparent; cursor: pointer;" name="color"
                                 [(ngModel)]="this.section1.color">
                         </div>
                         <br />
                         <button type="submit" class="btn btn-primary" style="transform: translateY(-15px);"
-                            (click)="this.Dclass.modifyClass(this.classId,this.section1);this.update()">Modifier la matière</button>
+                            [ngStyle]="{'background-color' : this.clasColor}"
+                            (click)="this.Dclass.modifyClass(this.classId,this.section1);this.update()">Modifier la
+                            matière</button>
                     </form>
                 </div>
             </div>
@@ -31,19 +35,24 @@
                     <h3>Inscrire des éleves :</h3>
                     <div class="registerStudent">
                         <ul>
-                            <li *ngFor="let el of this.Dclass.users">{{el.name}} {{el.fam_name}} ({{el.pseudo}}) 
-                                <i *ngIf="el.id != this.user.data.id" (click)="this.rmUser(el.id)" class="fa-solid fa-xmark fa-lg" style="color: red; cursor: pointer;"></i></li>
+                            <li *ngFor="let el of this.Dclass.users">{{el.name}} {{el.fam_name}} ({{el.pseudo}})
+                                <i *ngIf="el.id != this.user.data.id" (click)="this.rmUser(el.id)"
+                                    class="fa-solid fa-xmark fa-lg delete"></i>
+                            </li>
                         </ul>
                     </div>
                     <br />
                     <form>
                         <label for="name">Inscrire un utilisateur</label><br />
-                        <input type="text" id="username" name="username" style="margin-right: 10px;" [(ngModel)]="this.section2.user">
-                        <button type="submit" class="btn btn-primary" (click)="addUser()">+</button>
+                        <input type="text" class="input" id="username" name="username" style="margin-right: 10px;"
+                            [(ngModel)]="this.section2.user">
+                        <button type="submit" class="btn btn-primary" [ngStyle]="{'background-color' : this.clasColor}"
+                            (click)="addUser()">+</button>
                     </form>
-                    <p *ngIf="this.section2.err != ''" style="color: red;">Une erreur a eu lieu : {{this.section2.err}}</p>
-
-
+                    <br />
+                    <p *ngIf="this.section2.err != ''" style="color: rgb(255, 65, 65);">Une erreur a eu lieu :
+                        {{this.section2.err}}
+                    </p>
                     <br />
                 </div>
             </div>
@@ -80,13 +89,16 @@
                 base_url: '/tinymce',
                 suffix: '.min',
                 plugins: 'lists link image table code help wordcount',
-                toolbar: 'undo redo | code h1 h2 h3 | bold italic | alignleft aligncenter alignright alignjustify | forecolor lists'
+                toolbar: 'undo redo | code h1 h2 h3 | bold italic | alignleft aligncenter alignright alignjustify | forecolor | bullist numlist'
             }"></editor>
+            <br />
         </div>
         <form>
             <label for="name">Chemin du fichier :</label><br />
-            <input type="text" id="path" name="path" style="margin-right: 10px;" [(ngModel)]="this.section5.path">
-            <button type="submit" class="btn btn-primary" (click)="this.uploadHTML()">+</button>
+            <input class="input" type="text" id="path" name="path" style="margin-right: 10px;"
+                [(ngModel)]="this.section5.path">
+            <button type="submit" class="btn btn-primary" [ngStyle]="{'background-color' : this.clasColor}"
+                (click)="this.uploadHTML()">+</button>
         </form>
     </div>
 

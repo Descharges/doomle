@@ -1,7 +1,0 @@
-<h1>Section test</h1>
-<div cdkDropList class="ressources-list" (cdkDropListDropped)="drop($event)">
-    <div class="ressource" *ngFor="let ressource of ressourceList" cdkDrag>{{ressource.filename}}
-        <fa-icon [icon]="faTimes" (click)="onDeleteRessource(ressource)" ></fa-icon>
-    </div>
-    <button class="addRessource" (click)="openDialog()">Ajouter une ressource</button>
-</div>
