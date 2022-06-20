@@ -56,6 +56,7 @@ export class HtmlEditorComponent implements OnInit {
         this.className = data.data.name;
         this.clasColor = data.data.color;
         this.classId = data.data.id
+        
 
         this.section5.class = data.data.id
 
@@ -68,8 +69,9 @@ export class HtmlEditorComponent implements OnInit {
       }
     })
     this.html = "<p>Bienvenue sur doomle !</p>"
-
     console.log("htmleditorcomponent - classId =" + this.classId)
+
+    
   }
 
   leave(){
