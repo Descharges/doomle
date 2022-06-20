@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import { ClassService } from '../services/class.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Ressource } from 'src/objectClass/Ressource';
 
 @Component({
   selector: 'app-html-editor',
@@ -17,6 +18,8 @@ export class HtmlEditorComponent implements OnInit {
   className: string = ""
   clasColor: string = ""
   classId: number;
+
+  ressourceName: string = "";
 
   sub: Subscription;
 
@@ -33,10 +36,12 @@ export class HtmlEditorComponent implements OnInit {
 
   section3 = [];
 
-  section5 = {
+  ressource : Ressource = {
+    id : -1,
     class : 0,
     path: "",
     type: ".html",
+    filename: "",
     filedata: ""
   }
 
@@ -56,8 +61,9 @@ export class HtmlEditorComponent implements OnInit {
         this.className = data.data.name;
         this.clasColor = data.data.color;
         this.classId = data.data.id
+        
 
-        this.section5.class = data.data.id
+        this.ressource.class = data.data.id
 
         this.section1.name = data.data.name;
         this.section1.description = data.data.description;
@@ -68,6 +74,9 @@ export class HtmlEditorComponent implements OnInit {
       }
     })
     this.html = "<p>Bienvenue sur doomle !</p>"
+    console.log("htmleditorcomponent - classId =" + this.classId)
+
+    
   }
 
   leave(){
@@ -95,14 +104,19 @@ export class HtmlEditorComponent implements OnInit {
     if(!data.success){
       this.section2.err = data.message
     }
-    console.log((data as any));
+    console.log((data as any))
     this.update()
   }
 
   async uploadHTML(){
-    this.section5.filedata = btoa(this.html)
-    await this.Dclass.uploadFile(this.section5);
+    this.ressource.path += "/" + this.ressourceName
+    this.ressource.filedata = btoa(this.html)
+    await this.Dclass.uploadFile(this.ressource)
     this.update()
+
+    this.ressource = new Ressource();
+    this.ressourceName = ""
+    
   }
 
 }

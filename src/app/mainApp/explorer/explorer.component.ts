@@ -39,8 +39,6 @@ export class ExplorerComponent implements OnInit {
   oldDoc: number;
   oldClass: number;
 
-  Le_boule_des_filles_selon_tachikart : Observable<any>
-
 
 
   constructor(private dClass: ClassService, private cDoc: CurrentdocService, public user: UserService, public router: Router) { }
@@ -49,6 +47,11 @@ export class ExplorerComponent implements OnInit {
 
     this.dClass.observable.subscribe(data1 => {
       console.log(data1)
+      console.log("test explorer component")
+      if(+ this.user.data.name != null){
+        console.log("explorer component user - name : null" )
+      }
+      
       if (data1.success == true && this.oldClass!=data1.data.id) {
         this.name = data1.data.name;
         this.classId = data1.data.id 
@@ -60,7 +63,7 @@ export class ExplorerComponent implements OnInit {
 
       } else if (data1.message != "no class selected" && (this.oldClass == null || this.oldClass!=data1.data.id)) {
         this.name = "Erreur !";
-        this.description = "Le cours auxquelle vous essayer d'accéder ne vous est pas accessible ou n'existe pas";
+        this.description = "Le cours auquel vous essayer d'accéder ne vous est pas accessible ou n'existe pas";
         this.classColor = "#eb4949"
         this.files = []
       }

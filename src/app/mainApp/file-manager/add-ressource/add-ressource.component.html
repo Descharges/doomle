@@ -1,0 +1,29 @@
+<form (ngSubmit)="addRessource()" class="form-group">
+    <div class="">
+      
+        <div class="col-sm mb-3">
+          <label>Nom de la ressource</label>
+        <input type="text" class="form-control" [(ngModel)]="this.res.filename" name="ressourceName"/>
+        </div>
+    </div>
+
+
+
+
+    <div class="form-row ">
+        <div class="col-sm mb-3">
+        <label>Chemin de la ressource</label>
+        <input type="text" class="form-control" [(ngModel)]="this.res.path" name="ressourcePath"/>
+        </div>
+    </div>
+
+
+    
+    <div class="selectFile mb-3">
+      <label>Sélection du fichier</label>
+      <input type="file" (change)="onFileSelected($event)" />
+    </div>
+    
+    <input type="submit" class="btn btn-primary"  value="+" [ngStyle]="{'background-color' : this.color}"/>
+
+</form>

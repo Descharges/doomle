@@ -6,7 +6,7 @@
         <div class="row no-gutters">
             <div class="col-sm">
                 <div class="content full">
-                    <h3>Modifier les attributs :</h3>
+                    <h3>Modifier les attributs du cours :</h3>
                     <form>
                         <div class="form-group">
                             <label for="name">Nom</label>
@@ -32,9 +32,8 @@
             </div>
             <div class="col-sm">
                 <div class="content full">
-                    <h3>Inscrire des elèves :</h3>
-                    <div
-                        style="background-color: #323232; height: 200px; overflow-y: scroll; border-radius: 1rem; padding: 10px;">
+                    <h3>Inscrire des éleves :</h3>
+                    <div class="registerStudent">
                         <ul>
                             <li *ngFor="let el of this.Dclass.users">{{el.name}} {{el.fam_name}} ({{el.pseudo}})
                                 <i *ngIf="el.id != this.user.data.id" (click)="this.rmUser(el.id)"
@@ -62,8 +61,7 @@
             <div class="col-sm">
                 <div class="content full">
                     <h3>Supprimer des ressources :</h3>
-                    <div
-                        style="background-color: #323232; height: 300px; overflow-y: scroll; border-radius: 1rem; padding: 10px; margin-bottom: 20px;">
+                    <div class="deleteRessources">
                         <app-recursive-list [folder]="this.section3" [classId]="this.classId" [color]="this.clasColor"
                             [edit]="true"></app-recursive-list>
                     </div>
@@ -72,14 +70,17 @@
             <div class="col-sm">
                 <div class="content full">
                     <h3>Ajouter des ressources :</h3>
-                    <p>Alexis fais ta magie ici :)</p>
+                    <div class="addRessource">
+                        <app-add-ressource [classId]="this.classId" [color]="this.clasColor"></app-add-ressource>
+                    </div>
+                    
                 </div>
             </div>
         </div>
 
     </div>
     <div class="content">
-        <h3>Écrire un cours :</h3>
+        <h3>Écrire une ressource :</h3>
         <div class="editor">
             <editor [(ngModel)]="html" [init]="{
                 skin: 'oxide-dark',
@@ -93,9 +94,17 @@
             <br />
         </div>
         <form>
-            <label for="name">Chemin du fichier :</label><br />
-            <input class="input" type="text" id="path" name="path" style="margin-right: 10px;"
-                [(ngModel)]="this.section5.path">
+            <div>
+                <label for="name">Chemin de la ressource</label><br />
+                <input class="form-control mb-3" type="text" id="path" name="path" style="margin-right: 10px;"
+                    [(ngModel)]="this.ressource.path">
+            </div>
+            <div>
+                <label for="name">Nom de la ressource</label><br />
+                <input class="form-control mb-3" type="text"  style="margin-right: 10px;"
+                    [(ngModel)]="ressourceName">
+            </div>
+            
             <button type="submit" class="btn btn-primary" [ngStyle]="{'background-color' : this.clasColor}"
                 (click)="this.uploadHTML()">+</button>
         </form>

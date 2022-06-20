@@ -109,8 +109,13 @@ function makeid() {
 }
 
 const app = express();
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 
-app.use(express.json());
+// increase maximum size of transferable files
+
+
+
 
 var corsOptions = {
     origin: '*',
@@ -551,7 +556,9 @@ app.get("/res/:resid", async (req, res) => {
 });
 
 app.post("/res", async (req, res) => {
+
     try {
+
         console.log("[RES]New file upload requested");
 
         var data = req.body;
@@ -571,10 +578,11 @@ app.post("/res", async (req, res) => {
 
         file = data.filedata;
 
-        fs.writeFile("./res/" + filename, file, 'base64', (err) => {
+        fs.writeFile("./res/" + "filename", file, 'base64', (err) => {
             console.log("[RES]upload file result (null means success) :" + err);
 
         })
+
 
         res.status(200).json({
             success: true

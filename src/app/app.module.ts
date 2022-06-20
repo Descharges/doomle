@@ -19,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './mainApp/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExplorerComponent } from './mainApp/explorer/explorer.component';
-
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CalendarComponent } from './mainApp/calendar/calendar.component';
@@ -32,7 +32,7 @@ import { HtmlEditorComponent } from './html-editor/html-editor.component';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ClassService } from './services/class.service';
-
+import { AddRessourceComponent } from './mainApp/file-manager/add-ressource/add-ressource.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +48,7 @@ import { ClassService } from './services/class.service';
     RecursiveListComponent,
     HtmlEditorComponent,
     DashboardComponent,
+    AddRessourceComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,9 +68,12 @@ import { ClassService } from './services/class.service';
       useFactory: adapterFactory
     }),
     NgbModule,
-    EditorModule
+    EditorModule,
+    MatDialogModule
   ],
-  providers: [ { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],
+  providers: [{provide: MatDialogRef, useValue: {}},
+    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
