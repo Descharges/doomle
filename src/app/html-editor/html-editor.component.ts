@@ -27,7 +27,7 @@ export class HtmlEditorComponent implements OnInit {
   }
 
   section2 = {
-    user : "user",
+    user : "",
     err : ""
   }
 

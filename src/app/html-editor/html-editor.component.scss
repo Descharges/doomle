@@ -38,4 +38,42 @@
     margin-left: -3px;
     margin-right: -3px;
 }
-  
+
+.btn, .btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #232323;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4) 0 0);
+  background-blend-mode: lighten;
+  transition: 0.5s;
+}
+
+.btn:hover {
+  background-blend-mode: darken;
+  color: white !important;
+  transition: 0.5s;
+}
+
+.form-control, .input{
+
+  border-radius: 0.5rem;
+  padding: 5px;
+
+  background-color: #232323;
+  box-shadow: none !important;
+  outline: solid 1px white;
+  color: white;
+}
+
+.delete{
+  color: white;
+  cursor: pointer;
+  background-color: rgb(255, 65, 65);
+  padding :10px;
+  border-radius: 1rem;
+  margin-left: 5px;
+}
+
+.delete:hover{
+  background-color: rgb(197, 50, 50);
+}
