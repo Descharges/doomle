@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit, SecurityContext } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { ɵassignExtraOptionsToRouter } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { CurrentdocService } from 'src/app/services/currentdoc.service';
@@ -16,9 +16,10 @@ export class MainViewComponent implements OnInit {
   @Input() classId: Number;
   @Input() resId: Number;
   type: String;
-  text: String;
+  text: string;
   stringUrl: string;
   url: SafeUrl;
+  safeHtml: SafeHtml
 
   constructor(private sanitizer: DomSanitizer, private cDoc: CurrentdocService, private http: HttpClient) { }
 
@@ -54,6 +55,7 @@ export class MainViewComponent implements OnInit {
 
             this.text = await firstValueFrom(this.http.get(this.stringUrl, { responseType: 'text' }))
             console.log(this.text)
+            this.safeHtml = this.sanitizer.bypassSecurityTrustHtml(this.text)
             break;
 
           default:

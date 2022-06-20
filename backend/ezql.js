@@ -1,4 +1,6 @@
 const { query } = require("express");
+const { async } = require("rxjs");
+var SqlString = require('sqlstring');
 
 //SELECT * FROM user WHERE mail = "${req.body.username}";`
 module.exports = {
@@ -36,7 +38,7 @@ module.exports = {
         });
         query = query.slice(0, -2) + ") VALUES (";
         arr.forEach(el => {
-            query += "\"" + el.v + "\", "
+            query += SqlString.escape(el.v) + ", "
         });
         query = query.slice(0, -2) + ")";
 
@@ -54,7 +56,52 @@ module.exports = {
             console.log("[SQL] Request failed : " + err.text)
             throw "SQL query failed"
         }
+    },
+
+    UPDATE: async(pool, table, arr, where, toAdd) => {
+        var query = "UPDATE " + table + " SET ";
+
+        arr.forEach(el => {
+            query += el.c + " = " + SqlString.escape(el.v) + ", "
+        });
+        query = query.slice(0, -2)
+
+        if(where != undefined && where != ""){
+            query += " WHERE " + where;
+        }
+
+        if(toAdd != undefined){
+            query += toAdd;
+        }
+        query += ";"
+
+        
+
+
+        console.log("[SQL] Running query : " + query)
+        try{
+            return await pool.query(query)
+        }catch(err){
+            console.log("[SQL] Request failed : " + err.text)
+            throw "SQL query failed"
+        }
+
+    },
+
+    DELETE: async(pool, table, where) => {
+        var query = `DELETE FROM ${table} WHERE ${where} ;`;
+
+        console.log("[SQL] Running query : " + query)
+        try{
+            return await pool.query(query)
+        }catch(err){
+            console.log("[SQL] Request failed : " + err.text)
+            throw "SQL query failed"
+        }
+
     }
+
+
 
 }
 

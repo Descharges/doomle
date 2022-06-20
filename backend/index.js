@@ -42,7 +42,7 @@ function buildFolder(arr, iterations, depth) {
             var toGoThrough = 0;
             var folderName = split[depth];
 
-            while( i < arr.length && (arr[i].path.split("/")[depth] == folderName)){
+            while (i < arr.length && (arr[i].path.split("/")[depth] == folderName)) {
                 i++;
                 toGoThrough++;
             }
@@ -53,7 +53,7 @@ function buildFolder(arr, iterations, depth) {
                 type: "folder",
                 name: split[depth],
                 opened: false,
-                content: buildFolder(arr.slice(i-toGoThrough+1),toGoThrough,depth+1)
+                content: buildFolder(arr.slice(i - toGoThrough + 1), toGoThrough, depth + 1)
             }
 
         } else {
@@ -72,7 +72,7 @@ function buildFolder(arr, iterations, depth) {
         iOut++
     }
 
-    return(out);
+    return (out);
 
 
 }
@@ -245,7 +245,7 @@ app.get("/classes", async (req, res) => {
     if (req.session.logged) {
 
 
-        var data = await ezql.SELECT(pool, "class LEFT JOIN inscription ON class.id = inscription.classid",[],"userid="+req.session.user.id);
+        var data = await ezql.SELECT(pool, "class LEFT JOIN inscription ON class.id = inscription.classid", [], "userid=" + req.session.user.id);
         res.status(200).json({
             success: true,
             data: data
@@ -259,36 +259,36 @@ app.get("/classes", async (req, res) => {
 
 });
 
-app.post("/class", async (req, res)=>{
-    if((req.session.logged && req.session.user.type=="teacher")){
+app.post("/class", async (req, res) => {
+    if ((req.session.logged && req.session.user.type == "teacher")) {
         data = req.body;
         if (verify([data.name, data.description, data.color]) != false) {
-            var result = await ezql.INSERT(pool, "class",[
-                {c:"name", v:data.name},
-                {c:"description", v:data.description},
-                {c:"color", v:data.color},
-            ]," RETURNING id")
+            var result = await ezql.INSERT(pool, "class", [
+                { c: "name", v: data.name },
+                { c: "description", v: data.description },
+                { c: "color", v: data.color },
+            ], " RETURNING id")
             res.status(200).json({
                 success: true,
             })
 
             ezql.INSERT(pool, "inscription", [
-                {c:"userid", v:req.session.user.id},
-                {c:"classid", v:result[0].id},
-                {c:"isFav", v:0},
-                {c:"isArchived", v:0},
+                { c: "userid", v: req.session.user.id },
+                { c: "classid", v: result[0].id },
+                { c: "isFav", v: 0 },
+                { c: "isArchived", v: 0 },
             ])
 
 
             console.log(result[0].id)
 
-        }else{
+        } else {
             res.status(200).json({
                 success: false,
                 message: "Bad request"
             })
         }
-    }else{
+    } else {
         res.status(200).json({
             success: false,
             message: "Not logged in or not a teacher"
@@ -296,6 +296,86 @@ app.post("/class", async (req, res)=>{
     }
 })
 
+app.patch("/class/:id", async (req, res) => {
+    if (req.session.logged || DEBUG) {
+        data = req.body;
+        if (verify([data.name, data.description, data.color]) == false) {
+            res.status(200).json({
+                success: false,
+                message: "bad request"
+            });
+        } else {
+            ezql.UPDATE(pool, "class", [
+                { c: "name", v: data.name },
+                { c: "description", v: data.description },
+                { c: "color", v: data.color },
+            ], "id = " + req.params.id)
+            res.status(200).json({
+                success: true
+            })
+        }
+    }
+})
+
+app.get("/class/:id/users", async (req, res) => {
+    if (req.session.logged || DEBUG) {
+        var data = await ezql.SELECT(pool, "user INNER JOIN inscription ON user.id = inscription.userid",
+            ['id', 'pseudo', 'name', 'fam_name', 'type'], 'classid=' + req.params.id);
+        data.forEach(el => {
+            el.id = Number(el.id)
+        });
+        res.status(200).json({
+            success: true,
+            data: data
+        })
+
+    } else {
+        res.status(200).json({
+            success: false,
+            message: "Not logged in"
+        })
+    }
+})
+
+app.post("/class/:idClass/users/:name", async (req, res) => {
+    if (req.session.logged || DEBUG) {
+
+        var user = await ezql.SELECT(pool, "user", ['id'], `pseudo='${req.params.name}'`)
+
+        if (user.length == 0) {
+            res.status(200).json({
+                success: false,
+                message: "no user found"
+            });
+        } else {
+            var inscription = await ezql.SELECT(pool, "inscription", [], `userid='${user[0].id}' AND classid=${req.params.idClass}`)
+            
+            if(inscription.length != 0){
+                res.status(200).json({
+                    success: false,
+                    message: "allready subscribed"
+                });
+            }else{
+                ezql.INSERT(pool, 'inscription',[
+                    {c:'userid', v:user[0].id},
+                    {c:'classid', v:req.params.idClass},
+                    {c:'isFav', v:0},
+                    {c:'isArchived', v:0},
+                ])
+                res.status(200).json({
+                    success: true
+                })
+            }
+
+        }
+    } else {
+        res.status(200).json({
+            success: false,
+            message: "Not logged in"
+        });
+    }
+
+})
 
 
 app.get("/class/:id", async (req, res) => {
@@ -313,7 +393,7 @@ app.get("/class/:id", async (req, res) => {
 
 
                 filesData = await ezql.SELECT(pool, "ressources", ['id', 'path', 'type'], `class = ${Number(req.params.id)} ORDER BY path`)
-                
+
                 data[0].ressources = buildFolder(filesData);
 
                 res.status(200).json({
@@ -372,6 +452,36 @@ app.get("/searchres/:search", async (req, res) => {
 
 });
 
+app.delete("/class/:idClass/users/:userId", async (req, res)=>{
+
+    if (req.session.logged || DEBUG) {
+        await ezql.DELETE(pool,"inscription",`userid=${req.params.userId} AND classid=${req.params.idClass} `)
+        res.status(200).json({
+            success: true
+        })
+    }else{
+        res.status(200).json({
+            success: false,
+            message: "Not logged in"
+        });
+    }
+})
+
+app.delete("/res/:id", async (req, res)=>{
+
+    if (req.session.logged || DEBUG) {
+        await ezql.DELETE(pool,"ressources",`id=${req.params.id}`)
+        res.status(200).json({
+            success: true
+        })
+    }else{
+        res.status(200).json({
+            success: false,
+            message: "Not logged in"
+        });
+    }
+})
+
 
 app.get("/resmeta/:id", async (req, res) => {
     console.log("[REQ] File requested :" + req.params.id)
@@ -379,7 +489,7 @@ app.get("/resmeta/:id", async (req, res) => {
 
         //perform authorization control
 
-        var data = await ezql.SELECT(pool, "ressources", ["id","type", "class", "path"], `id = ${Number(req.params.id)} `)
+        var data = await ezql.SELECT(pool, "ressources", ["id", "type", "class", "path"], `id = ${Number(req.params.id)} `)
 
         if (data.length == 0) {
             res.status(200).json({

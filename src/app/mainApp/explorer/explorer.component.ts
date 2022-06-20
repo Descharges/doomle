@@ -7,6 +7,7 @@ import { ClassService } from 'src/app/services/class.service';
 import { Observable } from 'rxjs';
 import { CurrentdocService } from 'src/app/services/currentdoc.service';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 
 
@@ -40,7 +41,7 @@ export class ExplorerComponent implements OnInit {
 
 
 
-  constructor(private dClass: ClassService, private cDoc: CurrentdocService, public user: UserService) { }
+  constructor(private dClass: ClassService, private cDoc: CurrentdocService, public user: UserService, public router: Router) { }
 
   ngOnInit(): void {
 
@@ -53,6 +54,7 @@ export class ExplorerComponent implements OnInit {
       
       if (data1.success == true && this.oldClass!=data1.data.id) {
         this.name = data1.data.name;
+        this.classId = data1.data.id 
         this.description = data1.data.description;
         this.classColor = data1.data.color
         this.files = data1.data.ressources
