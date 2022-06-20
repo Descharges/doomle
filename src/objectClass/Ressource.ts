@@ -1,6 +1,6 @@
 export class Ressource {
     id: number = -1;
-    class: string;
+    class: number;
     path: string = "";
     type: string = "";
  

@@ -1,39 +1,38 @@
 <form (ngSubmit)="addRessource()">
     <div class="">
-        <div class="col-md-4 mb-3">
-        <label>Nom de la ressource</label>
+      
+        <div class="col-sm mb-3">
+          <label>Nom de la ressource</label>
         <input type="text" class="form-control" [(ngModel)]="this.res.filename" name="ressourceName"/>
         </div>
     </div>
 
-    <div>
-    <select name="class" [(ngModel)]="this.res.id">
-        <option value="" disabled>Cours</option>
-        <option *ngFor="let class of classes" [ngValue]="class.name">
-          {{ class.name }}
-        </option>
-      </select>
-    </div>
 
 
-    <div>
-    <select name="class" [(ngModel)]="this.res.type">
-        <option value="" disabled>Format de la ressource</option>
-        <option *ngFor="let filetype of filetypes" [ngValue]="filetype">
-          {{ filetype }}
-        </option>
-      </select>
-    </div>
 
-
-    <div class="form-row">
-        <div class="col-md-4 mb-3">
+    <div class="form-row ">
+        <div class="col-sm mb-3">
         <label>Chemin de la ressource</label>
         <input type="text" class="form-control" [(ngModel)]="this.res.path" name="ressourcePath"/>
         </div>
     </div>
+
     
-    <input type="file" (change)="onFileSelected($event)" />
-    <input type="submit" value="Enregistrer ressource"/>
+    <div class="dropdown mb-3">
+      <select name="class" class="btn btn-secondary dropdown-toggle" [(ngModel)]="this.res.type">
+          <option value="" disabled>Format de la ressource</option>
+          <option *ngFor="let filetype of filetypes" [ngValue]="filetype" class="dropdown-item">
+            {{ filetype }}
+          </option>
+        </select>
+      </div>
+
+    
+    <div class="selectFile mb-3">
+      <label>Sélection du fichier</label>
+      <input type="file" (change)="onFileSelected($event)" />
+    </div>
+    
+    <input type="submit" class="btn btn-primary"  value="Ajouter la ressource"/>
 
 </form>

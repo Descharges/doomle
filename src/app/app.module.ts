@@ -36,7 +36,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ClassService } from './services/class.service';
 import { AddRessourceComponent } from './mainApp/file-manager/add-ressource/add-ressource.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

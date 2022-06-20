@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { isThisWeek } from 'date-fns';
 import { RessourceService } from 'src/app/services/ressource.service';
 import { Class } from 'src/objectClass/Class';
 import { Ressource } from 'src/objectClass/Ressource';
+import { FormsModule } from '@angular/forms';
+import { ClassService } from 'src/app/services/class.service';
 
 @Component({
   selector: 'app-add-ressource',
@@ -13,6 +15,9 @@ export class AddRessourceComponent implements OnInit {
 
   res: Ressource = new Ressource();
 
+
+  @Input() color: string;
+  @Input() classId: number;
   classes: Class[] = [
     new Class("SI40"),
     new Class("AP4A")
@@ -25,9 +30,17 @@ export class AddRessourceComponent implements OnInit {
     ".html",
     "URL"
   ]
-  constructor(private ressourceService : RessourceService) { }
+  constructor(private ressourceService : RessourceService, private classService : ClassService) { }
 
   ngOnInit(): void {
+
+    this.classService.observable.subscribe(data1 => {
+      console.log(data1)
+      console.log("test explorer component")
+    })
+
+    this.res.class = this.classId;
+     
   }
 
   //Convert to base 64
@@ -41,8 +54,15 @@ export class AddRessourceComponent implements OnInit {
   }
 
   async addRessource(){
-    console.log(this.res)
+
+    // Chopper le classId de html editor
+    console.log("addressource - res = " +  this.res)
+    this.res.path += "/" + this.res.filename
     this.ressourceService.addRessource(this.res)
+
+    console.log(this.res)
+
+    this.res = new Ressource();
 
   }
 

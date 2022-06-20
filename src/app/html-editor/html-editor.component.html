@@ -5,7 +5,7 @@
         <div class="row no-gutters">
             <div class="col-sm">
                 <div class="content full">
-                    <h3>Modifier les attributs :</h3>
+                    <h3>Modifier les attributs du cours :</h3>
                     <form>
                         <div class="form-group">
                             <label for="name">Nom</label>
@@ -28,9 +28,8 @@
             </div>
             <div class="col-sm">
                 <div class="content full">
-                    <h3>Inscrire des elèves :</h3>
-                    <div
-                        style="background-color: #484848; height: 200px; overflow-y: scroll; border-radius: 1rem; padding: 10px;">
+                    <h3>Inscrire des éleves :</h3>
+                    <div class="registerStudent">
                         <ul>
                             <li *ngFor="let el of this.Dclass.users">{{el.name}} {{el.fam_name}} ({{el.pseudo}}) 
                                 <i *ngIf="el.id != this.user.data.id" (click)="this.rmUser(el.id)" class="fa-solid fa-xmark fa-lg" style="color: red; cursor: pointer;"></i></li>
@@ -53,8 +52,7 @@
             <div class="col-sm">
                 <div class="content full">
                     <h3>Supprimer des ressources :</h3>
-                    <div
-                        style="background-color: #484848; height: 300px; overflow-y: scroll; border-radius: 1rem; padding: 10px; margin-bottom: 20px;">
+                    <div class="deleteRessources">
                         <app-recursive-list [folder]="this.section3" [classId]="this.classId" [color]="this.clasColor"
                             [edit]="true"></app-recursive-list>
                     </div>
@@ -63,7 +61,10 @@
             <div class="col-sm">
                 <div class="content full">
                     <h3>Ajouter des ressources :</h3>
-                    <p>Alexis fais ta magie ici :)</p>
+                    <div class="addRessource">
+                        <app-add-ressource [classId]="this.classId" [color]="this.clasColor"></app-add-ressource>
+                    </div>
+                    
                 </div>
             </div>
         </div>

@@ -68,6 +68,8 @@ export class HtmlEditorComponent implements OnInit {
       }
     })
     this.html = "<p>Bienvenue sur doomle !</p>"
+
+    console.log("htmleditorcomponent - classId =" + this.classId)
   }
 
   leave(){

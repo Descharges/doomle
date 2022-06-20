@@ -557,7 +557,6 @@ app.get("/res/:resid", async (req, res) => {
 
 app.post("/res", async (req, res) => {
 
-    console.log("ressource peut-être envoyée")
     try {
 
         console.log("[RES]New file upload requested");
