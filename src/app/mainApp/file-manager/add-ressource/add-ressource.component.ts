@@ -23,12 +23,12 @@ export class AddRessourceComponent implements OnInit {
     new Class("AP4A")
   ];
 
+
+  
   filetypes: string[] = [
-    "aucun",
-    ".pdf",
-    ".txt",
-    ".html",
-    "URL"
+    "pdf",
+    "txt",
+    "html"
   ]
   constructor(private ressourceService : RessourceService, private classService : ClassService) { }
 
@@ -38,8 +38,6 @@ export class AddRessourceComponent implements OnInit {
       console.log(data1)
       console.log("test explorer component")
     })
-
-  
 
   }
 
@@ -51,6 +49,12 @@ export class AddRessourceComponent implements OnInit {
     reader.onload = () => {
         this.res.filedata = (reader.result as string);
     };
+  
+  this.res.type = "none"
+  if(this.filetypes.indexOf(this.res.type) > -1){
+    this.res.type = file.name.split(".",2)[1]
+  }
+  console.log("addressource filetype : " + this.res.type)
   }
 
   async addRessource(){
@@ -58,12 +62,14 @@ export class AddRessourceComponent implements OnInit {
     console.log("addressource - res = " +  this.res)
     this.res.path += "/" + this.res.filename
     this.res.class = this.classId;
-
+   
     this.ressourceService.addRessource(this.res)
     
     //Empty fields
     this.res = new Ressource();
 
   }
+
+  
 
 }

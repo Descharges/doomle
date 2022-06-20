@@ -1,4 +1,4 @@
-<form (ngSubmit)="addRessource()">
+<form (ngSubmit)="addRessource()" class="form-group">
     <div class="">
       
         <div class="col-sm mb-3">
@@ -18,21 +18,12 @@
     </div>
 
 
-    <div class="dropdown mb-3">
-      <select name="class" class="btn btn-secondary dropdown-toggle" [(ngModel)]="this.res.type">
-          <option value="" disabled>Format de la ressource</option>
-          <option *ngFor="let filetype of filetypes" [ngValue]="filetype" class="dropdown-item">
-            {{ filetype }}
-          </option>
-        </select>
-      </div>
-
     
     <div class="selectFile mb-3">
       <label>Sélection du fichier</label>
       <input type="file" (change)="onFileSelected($event)" />
     </div>
     
-    <input type="submit" class="btn btn-primary"  value="Ajouter la ressource" [ngStyle]="{'background-color' : this.color}"/>
+    <input type="submit" class="btn btn-primary"  value="+" [ngStyle]="{'background-color' : this.color}"/>
 
 </form>
