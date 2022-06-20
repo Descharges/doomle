@@ -33,6 +33,7 @@ export class MainViewComponent implements OnInit {
       if (data.success == false) {
 
         if(data.message == "no ressource selected"){
+          this.type = "none"
           this.text = "Bienvenue sur Doomle ! Pour commencer, choissisez une ressource à afficher."
         }else{
           this.type = "none"

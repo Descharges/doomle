@@ -14,7 +14,6 @@ export class CurrentdocService {
 
     this.observable = new Observable(sub => {
       route.queryParams.subscribe( async params => {
-
         if (params['res'] == null) {
           sub.next({
             success: false,

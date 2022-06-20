@@ -65,7 +65,7 @@ export class CheckloginService {
 
     let out: string;
 
-    const data = await this.http.post(url, body, {
+    const data = await this.http.post("/api/newuser", body, {
       withCredentials: true,
       observe: 'body',
       responseType: 'text'
