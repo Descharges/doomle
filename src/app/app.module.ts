@@ -19,8 +19,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './mainApp/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExplorerComponent } from './mainApp/explorer/explorer.component';
-import { FileManagerComponent } from './mainApp/file-manager/file-manager.component';
-import { FileManagerSectionComponent } from './mainApp/file-manager/file-manager-section/file-manager-section.component';
 
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -43,8 +41,6 @@ import { ClassService } from './services/class.service';
     MainViewComponent,
     SidebarComponent,
     ExplorerComponent,
-    FileManagerComponent,
-    FileManagerSectionComponent,
     MainViewComponent,
     MainappComponent,
     RegisterComponent,

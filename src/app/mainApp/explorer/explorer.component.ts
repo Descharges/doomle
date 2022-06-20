@@ -25,7 +25,7 @@ export class ExplorerComponent implements OnInit {
   @Input() classId: number;
   @Input() resId: Number;
   @Input() selectedClass: Class = new Class();
-  @Input() explorerOpened: boolean = false;
+  @Input() explorerOpened: boolean = true;
 
 
   //@todo array of boolean depending on the number of submenues there is

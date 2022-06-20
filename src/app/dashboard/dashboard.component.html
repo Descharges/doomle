@@ -4,7 +4,7 @@
             <img src="assets/logo.png" height="40" style="margin-left: 10px;" />
         </div>
         <div class="col" style="text-align: center;">
-            <input class="form-control mr-sm-2" type="search" placeholder="Rechcher un document" aria-label="Search"
+            <input class="form-control mr-sm-2" type="search" placeholder="Rechercher un document" aria-label="Search"
                 [(ngModel)]="this.search" (ngModelChange)="onChange($event)">
         </div>
         <div class="col" style="text-align: right;">
@@ -86,7 +86,7 @@
             </div>
 
             <div *ngIf="this.user.data.type == 'teacher'" class="elem" style="width:300px; color: gray;" (click)="this.showform=true">
-                <h2 style="margin-left: 20px; margin-bottom: -10px;">Nouvelle matière</h2>
+                <h2 style="margin-left: 20px; margin-bottom: -5px;">Nouvelle matière</h2>
                 <div style="margin: 10px; padding: 10px; border-radius: 20px; border-width: 1px; border:3px solid;">
                     <p style="margin-left:0px; color: white; white-space: normal;">Cliquez ici pour ajouter une nouvelle matière</p>
                 </div>
