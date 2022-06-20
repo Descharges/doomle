@@ -1,0 +1,39 @@
+<form (ngSubmit)="addRessource()">
+    <div class="">
+        <div class="col-md-4 mb-3">
+        <label>Nom de la ressource</label>
+        <input type="text" class="form-control" [(ngModel)]="this.res.filename" name="ressourceName"/>
+        </div>
+    </div>
+
+    <div>
+    <select name="class" [(ngModel)]="this.res.id">
+        <option value="" disabled>Cours</option>
+        <option *ngFor="let class of classes" [ngValue]="class.name">
+          {{ class.name }}
+        </option>
+      </select>
+    </div>
+
+
+    <div>
+    <select name="class" [(ngModel)]="this.res.type">
+        <option value="" disabled>Format de la ressource</option>
+        <option *ngFor="let filetype of filetypes" [ngValue]="filetype">
+          {{ filetype }}
+        </option>
+      </select>
+    </div>
+
+
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+        <label>Chemin de la ressource</label>
+        <input type="text" class="form-control" [(ngModel)]="this.res.path" name="ressourcePath"/>
+        </div>
+    </div>
+    
+    <input type="file" (change)="onFileSelected($event)" />
+    <input type="submit" value="Enregistrer ressource"/>
+
+</form>

@@ -1,9 +1,11 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, CdkDrag} from '@angular/cdk/drag-drop';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Output } from '@angular/core';
+import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Ressource } from 'src/objectClass/Ressource';
+import { AddRessourceComponent } from '../add-ressource/add-ressource.component';
 
 
 @Component({
@@ -22,8 +24,20 @@ export class FileManagerSectionComponent implements OnInit {
   ];
 
 
-  constructor() { }
+  constructor(public dialog: MatDialog) {}
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddRessourceComponent, {
+      width: '250px',
+      data: {name:"Bebou"}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
+
+  }
   ngOnInit(): void {
   }
 

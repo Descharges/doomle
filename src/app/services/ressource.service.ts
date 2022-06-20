@@ -56,9 +56,18 @@ export class RessourceService {
     const url = `${this.apiUrl}/${ressource.id}`;
     return this.http.delete<Ressource>(url);
   }
-  /*
-    addRessource(ressource:Ressource):Observable<Ressource>{
-      return this.http.post<Ressource>(this.apiUrl, ressource, httpOptions);
-    }*/
+  
+  async addRessource(ressource:Ressource){
+    this.http.post(this.apiUrl + "/res", ressource,{
+      observe: "body",
+      withCredentials: true,
+      responseType: "json"
+    }).toPromise().catch(err => {
+      console.log("add ressource error" + err.status)
+      return err.status;
+    })
+  
+
+  }
 
 }

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       this.login = "err";
     } else if(login){
       this.login = "succ";
-      this.router.navigateByUrl("/dash");
+      this.router.navigateByUrl("/app");
     }else{
       this.login = "fail"
     }
