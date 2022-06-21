@@ -5,6 +5,7 @@ import { Class } from 'src/objectClass/Class';
 import { Ressource } from 'src/objectClass/Ressource';
 import { FormsModule } from '@angular/forms';
 import { ClassService } from 'src/app/services/class.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-add-ressource',
@@ -47,15 +48,13 @@ export class AddRessourceComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-        this.res.filedata = (reader.result as string);
+        this.res.filedata = btoa((reader.result as string));
     };
-  
-  this.res.type = "none"
-  if(this.filetypes.indexOf(this.res.type) > -1){
-    this.res.type = file.name.split(".",2)[1]
+
+  this.res.type = "." +  file.name.split(".",2)[1]
+
   }
-  console.log("addressource filetype : " + this.res.type)
-  }
+
 
   async addRessource(){
 

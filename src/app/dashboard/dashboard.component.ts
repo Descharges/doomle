@@ -68,4 +68,13 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl(`/app?class=${id}&res=${res}`)
   }
 
+  translateUserTypeToFrench(userType : string){
+    if (userType == "teacher"){
+      return "(professeur)"
+    }else if(userType == "student"){
+      return "(étudiant)"
+    }
+    return ""
+  }
+
 }

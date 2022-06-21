@@ -8,7 +8,7 @@
                 [(ngModel)]="this.search" (ngModelChange)="onChange($event)">
         </div>
         <div class="col" style="text-align: right;">
-            <p style="display: inline;"><i class="fa-solid fa-user"></i> {{this.user.data.pseudo}} ({{this.user.data.type}})   </p>
+            <p style="display: inline;"><i class="fa-solid fa-user"></i> {{this.user.data.pseudo}} {{translateUserTypeToFrench(this.user.data.type)}}   </p>
             <button type="button" class="btn btn-danger" style="margin-right: 10px;" (click)="this.user.logout()">Déconnexion</button>
         </div>
     </div>

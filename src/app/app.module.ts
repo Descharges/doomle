@@ -20,6 +20,7 @@ import { SidebarComponent } from './mainApp/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExplorerComponent } from './mainApp/explorer/explorer.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CalendarComponent } from './mainApp/calendar/calendar.component';
@@ -33,6 +34,7 @@ import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ClassService } from './services/class.service';
 import { AddRessourceComponent } from './mainApp/file-manager/add-ressource/add-ressource.component';
+
 
 @NgModule({
   declarations: [
@@ -69,7 +71,8 @@ import { AddRessourceComponent } from './mainApp/file-manager/add-ressource/add-
     }),
     NgbModule,
     EditorModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
   ],
   providers: [{provide: MatDialogRef, useValue: {}},
     { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }

@@ -37,7 +37,7 @@ mat-toolbar {
   }
   
   .cta {
-    width: 50px;
+    width: 180px;
     height: 50px;
     border-radius: 50px;
     border: 2px solid red;
@@ -45,7 +45,7 @@ mat-toolbar {
     color: #fff;
     transition: width 0.5s;
   }
-  .cta:hover {
+  /*.cta:hover {
     width: 180px;
     transition: width 0.5s;
   }
@@ -71,7 +71,7 @@ mat-toolbar {
   .cta:hover .button-text {
     opacity: 1;
     transition: opacity 0.5s
-  }
+  }*/
 
 
 p {

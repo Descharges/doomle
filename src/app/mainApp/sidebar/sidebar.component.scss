@@ -21,24 +21,24 @@ button {
     top: 0;
     right: 0;
     height: 60px;
-    width: 60px;
+    width: 200px;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
     overflow: hidden;
     background-color:#121212;
     outline: none;
     font-size:xx-large;
-    color: #484848;
+    color: white;
     border: none;
     text-decoration:none;
     transition: 0.5s;
 }
-
+/*
 button:hover {
     width: 200px;
     color: white;
     transition: 0.5s;
-}
+}*/
 
 .submenu{
     margin-left: 10px;
