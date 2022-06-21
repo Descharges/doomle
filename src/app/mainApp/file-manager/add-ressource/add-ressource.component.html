@@ -13,20 +13,18 @@
     <div class="form-row ">
         <div class="col-sm mb-3">
         <label>Chemin de la ressource</label>
-        <div>
-          <i class="fa fa-question-circle"></i><span style="color:grey;font-size: 80%;"> Indiquez l'arborescence des dossiers, séparés par des slash</span>
-        </div>
-        <input type="text" class="form-control" [(ngModel)]="this.res.path" name="ressourcePath"/>
+        <i class="fa fa-question-circle"><br/></i><span style="color:grey;font-size: 80%;"> Indiquez l'arborescence des dossiers, séparés par des slash</span>
+        <input placeholder="Ex: 'Cours/CM'" type="text" class="form-control" [(ngModel)]="this.res.path" name="ressourcePath"/>
         </div>
     </div>
 
 
     
     <div class="selectFile mb-3">
-      <label>Sélection du fichier</label>
+      <label style="margin-right: 5px;">Sélection du fichier : </label>
       <input type="file" (change)="onFileSelected($event)" />
     </div>
-    
     <input type="submit" class="btn btn-primary mb-3"  value="+" [ngStyle]="{'background-color' : this.color}"/>
+
 
 </form>

@@ -42,6 +42,7 @@ export class MainViewComponent implements OnInit {
       } else {
         this.type = data.data.type
         this.stringUrl = "http://localhost:4200/api/res/" + data.data.id
+        this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.stringUrl)
 
         switch (this.type) {
           case ".pdf":
