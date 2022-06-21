@@ -109,7 +109,6 @@ export class HtmlEditorComponent implements OnInit {
   }
 
   async uploadHTML(){
-    this.ressource.path += "/" + this.ressourceName
     this.ressource.filedata = btoa(this.html)
     await this.Dclass.uploadFile(this.ressource)
     this.update()

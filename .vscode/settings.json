@@ -14,7 +14,6 @@
         ".editorconfig": true,
         ".angular/cache/13.3.4": true,
         ".vscode": true,
-        ".angular": true,
         ".browserslistrc": true,
         "src/environments": true
     },
@@ -27,7 +26,6 @@
         ".editorconfig",
         ".angular/cache/13.3.4",
         ".vscode",
-        ".angular",
         ".browserslistrc",
         "src/environments"
     ]

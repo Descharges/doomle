@@ -24,13 +24,13 @@ export class AddRessourceComponent implements OnInit {
   ];
 
 
-  
+
   filetypes: string[] = [
     "pdf",
     "txt",
     "html"
   ]
-  constructor(private ressourceService : RessourceService, private classService : ClassService) { }
+  constructor(private ressourceService: RessourceService, private classService: ClassService) { }
 
   ngOnInit(): void {
 
@@ -45,31 +45,30 @@ export class AddRessourceComponent implements OnInit {
   onFileSelected(event?: Event) {
     const file = (event!.target as HTMLInputElement).files![0];
     const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-        this.res.filedata = (reader.result as string);
+    
+    reader.onload = (f) => {
+      this.res.filedata = (btoa(reader.result as string));
     };
-  
-  this.res.type = "none"
-  if(this.filetypes.indexOf(this.res.type) > -1){
-    this.res.type = file.name.split(".",2)[1]
-  }
-  console.log("addressource filetype : " + this.res.type)
+    reader.readAsBinaryString(file);
+
+    this.res.type = "." + file.name.split(".", 2)[1]
+    console.log("addressource filetype : " + this.res.type)
   }
 
-  async addRessource(){
+  async addRessource() {
 
-    console.log("addressource - res = " +  this.res)
+    console.log("addressource - res = " + this.res)
     this.res.path += "/" + this.res.filename
     this.res.class = this.classId;
-   
+
     this.ressourceService.addRessource(this.res)
-    
+
     //Empty fields
     this.res = new Ressource();
+    window.location.reload()
 
   }
 
-  
+
 
 }

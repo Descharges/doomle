@@ -578,7 +578,7 @@ app.post("/res", async (req, res) => {
 
         file = data.filedata;
 
-        fs.writeFile("./res/" + "filename", file, 'base64', (err) => {
+        fs.writeFile("./res/" + filename, file, 'base64', (err) => {
             console.log("[RES]upload file result (null means success) :" + err);
 
         })

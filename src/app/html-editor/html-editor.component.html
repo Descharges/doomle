@@ -69,7 +69,7 @@
             </div>
             <div class="col-sm">
                 <div class="content full">
-                    <h3>Ajouter des ressources :</h3>
+                    <h3>Ajouter une ressource :</h3>
                     <div class="addRessource">
                         <app-add-ressource [classId]="this.classId" [color]="this.clasColor"></app-add-ressource>
                     </div>
@@ -80,7 +80,7 @@
 
     </div>
     <div class="content">
-        <h3>Écrire une ressource :</h3>
+        <h3>Écrire un cours :</h3>
         <div class="editor">
             <editor [(ngModel)]="html" [init]="{
                 skin: 'oxide-dark',
@@ -99,14 +99,9 @@
                 <input class="form-control mb-3" type="text" id="path" name="path" style="margin-right: 10px;"
                     [(ngModel)]="this.ressource.path">
             </div>
-            <div>
-                <label for="name">Nom de la ressource</label><br />
-                <input class="form-control mb-3" type="text"  style="margin-right: 10px;"
-                    [(ngModel)]="ressourceName">
-            </div>
             
             <button type="submit" class="btn btn-primary" [ngStyle]="{'background-color' : this.clasColor}"
-                (click)="this.uploadHTML()">+</button>
+                (click)="this.uploadHTML()">Ajouter</button>
         </form>
     </div>
 
